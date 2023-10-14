@@ -12,7 +12,11 @@ import demo from "./assets/landing.png";
 function App() {
   const [count, setCount] = useState(0);
   const [load, setload] = useState(false);
-  const { register, handleSubmit, errors } = useForm();
+const {
+  register,
+  handleSubmit,
+  formState: { errors },
+} = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
