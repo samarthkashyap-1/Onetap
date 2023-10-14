@@ -62,7 +62,7 @@ function App() {
               alt=""
               className=" scale-75 mt-10 -z-10 absolute top-0"
             />
-            <img src={demo} alt="" className=" scale-90 mt-10" />
+            <img src={demo} alt="" className=" mt-10" />
           </div>
         </div>
         <div className=" px-20 ">
