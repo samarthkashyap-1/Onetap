@@ -11,9 +11,9 @@ const [toggle,settoggle]  = useState(false)
   return (
     <>
       <nav
-        className={` fixed z-50 shadow-xl  flex h-20 top-0 md:gap-5 left-0 right-0 justify-between md:flex-col md:overflow-y-hidden ${
+        className={` fixed z-50 shadow-xl  flex h-20 top-0 md:gap-5  left-0 right-0 justify-between md:flex-col md:overflow-y-hidden ${
           toggle ? "md:h-72 sm:h-72 md:pb-10 " : "h-20"
-        }  w-[80%] mx-auto mt-10 rounded-xl bg-primary px-5 transition-all duration-300 ease-in-out text-white font-audiowide`}
+        } max-w-[80%] mx-auto mt-10 rounded-xl bg-primary px-5 transition-all duration-300 ease-in-out text-white font-audiowide`}
       >
         <div className=" md:mt-2 sm:mt-4 flex justify-between items-center my-auto">
           <img
@@ -40,7 +40,7 @@ const [toggle,settoggle]  = useState(false)
           </div>
         </div>
 
-        <div className="my-auto w-[30%] md:w-full  md:mx-auto ">
+        <div className="my-auto min-w-[30%] md:w-full md:mx-auto ">
           <ul className="flex justify-between md:flex-col md:gap-5 ">
             <li className="hover:text-sec transition-colors  duration-300 text-center ease-in-out cursor-pointer">
               Templates
@@ -56,12 +56,12 @@ const [toggle,settoggle]  = useState(false)
         <div className="my-auto w-[20%] md:w-full">
           <ul className="flex justify-evenly ">
             <li>
-              <button className="w-20 sm:w-16 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
+              <button className="px-5 sm:w-16 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
                 Login
               </button>
             </li>
             <li>
-              <button className="w-24 md:w-20 h-14 rounded-xl sm:max-h-10 bg-sec">
+              <button className="px-5 md:w-20 h-14 rounded-xl sm:max-h-10 bg-sec">
                 Signup
               </button>
             </li>
