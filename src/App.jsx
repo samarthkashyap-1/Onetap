@@ -33,19 +33,14 @@ function App() {
       {/* <h1 className="hidden sm:block md:block text-5xl text-center mt-96">
         Currently not supported on mobile and tablet devices
       </h1> */}
-      {/* <Navbar /> */}
 
-      {/* <Landing /> */}
-      {/* <Login/> */}
-
-      {/* <Signup /> */}
-
-     <Routes>
-        <Route path="/" element={<Landing/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<Signup/>}/>
+      <Routes>
+          <Route path="/" element={<Landing />} />
+        
+          <Route path="/login" element={<Login />} />
+        
+          <Route path="/signup" element={<Signup />} />
       </Routes>
-
     </>
   );
 }

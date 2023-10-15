@@ -4,6 +4,7 @@ import { useForm} from "react-hook-form";
 import { Link } from "react-router-dom";
 import showpass from "../assets/showpass.png";
 import  back from "../assets/back.png";
+import { Fade } from "react-awesome-reveal";
 const Signup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -20,7 +21,8 @@ const Signup = () => {
     reset()
   };
   return (
-    <div className="flex flex-col gap-10 sm:gap-5 px-10">
+    <div className="flex flex-col gap-10 px-10">
+      <Fade triggerOnce>
       <Link to="/">
       <div className="absolute flex justify-center top-5 cursor-pointer">
         <img src={back} alt="" className="w-8" />
@@ -119,6 +121,7 @@ const Signup = () => {
           </p>
         </div>
       </div>
+      </Fade>
     </div>
   );
 };

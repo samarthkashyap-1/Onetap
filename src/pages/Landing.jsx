@@ -25,14 +25,14 @@ const Landing = () => {
   };
   return (
     <div className="">
-        <Navbar/>
       <Fade triggerOnce>
         <header
           className=" bg-cover bg-no-repeat "
           style={{
-            backgroundImage: `url(${wave})`,
-          }}
-        >
+              backgroundImage: `url(${wave})`,
+            }}
+            >
+            <Navbar/>
           <div className="h-screen px-20 sm:px-10 flex ">
             <div className=" mt-40 text-primary flex-1">
               <Fade triggerOnce>
@@ -149,11 +149,12 @@ const Landing = () => {
       </div>
 
       <footer
-        className="relative bg-center bg-cover bg-no-repeat"
+        className="absolute right-0 left-0  bg-center bg-cover bg-no-repeat"
         style={{
           backgroundImage: `url(${wave2})`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
+
         }}
       >
         <div className="text-center text-white pt-20 pb-6">
