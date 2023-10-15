@@ -58,22 +58,21 @@ const [toggle,settoggle]  = useState(false)
           <ul className="flex justify-evenly ">
             <Link to="/login">
               <li>
-                <button className="px-5 sm:w-16 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
+                <button className="px-5 sm:px-0  sm:w-20 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
                   Login
                 </button>
               </li>
             </Link>
             <Link to="/Signup">
-
-            <li>
-              <button className="px-5 md:w-20 h-14 rounded-xl sm:max-h-10 bg-sec">
-                Signup
-              </button>
-            </li>
+              <li>
+                <button className="px-5  md:w-24 h-14 rounded-xl sm:max-h-10 bg-sec">
+                  Signup
+                </button>
+              </li>
             </Link>
-            </ul>
-            </div>
-            </nav>
+          </ul>
+        </div>
+      </nav>
     </>
   );
 };
