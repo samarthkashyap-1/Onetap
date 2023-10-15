@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import logo from "../assets/logo.png";
 import ham from "../assets/ham.svg";
 import close from "../assets/close.svg";
+import {Link} from "react-router-dom"
 const Navbar = () => {
 const [toggle,settoggle]  = useState(false)
 
@@ -55,19 +56,24 @@ const [toggle,settoggle]  = useState(false)
         </div>
         <div className="my-auto w-[20%] md:w-full">
           <ul className="flex justify-evenly ">
-            <li>
-              <button className="px-5 sm:w-16 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
-                Login
-              </button>
-            </li>
+            <Link to="/login">
+              <li>
+                <button className="px-5 sm:w-16 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
+                  Login
+                </button>
+              </li>
+            </Link>
+            <Link to="/Signup">
+
             <li>
               <button className="px-5 md:w-20 h-14 rounded-xl sm:max-h-10 bg-sec">
                 Signup
               </button>
             </li>
-          </ul>
-        </div>
-      </nav>
+            </Link>
+            </ul>
+            </div>
+            </nav>
     </>
   );
 };

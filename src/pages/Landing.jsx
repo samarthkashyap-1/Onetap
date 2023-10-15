@@ -5,6 +5,7 @@ import logo from "../assets/logo.png";
 import loader from "../assets/loader.json";
 import wave from "../assets/wavee.svg";
 import wave2 from "../assets/wave2.svg";
+import {Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import blob from "../assets/blob.svg";
@@ -14,15 +15,17 @@ import { Fade } from "react-awesome-reveal";
 const Landing = () => {
     const {
   register,
-  handleSubmit,
+  handleSubmit,reset,
   formState: { errors },
 } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
+    reset();
   };
   return (
     <div className="">
+        <Navbar/>
       <Fade triggerOnce>
         <header
           className=" bg-cover bg-no-repeat "
@@ -47,9 +50,11 @@ const Landing = () => {
                   Where Streamlining and Simplifying are Just One Tap Away!{" "}
                 </h1>
                 <div className="mt-12">
+                    <Link to="/login">
                   <button className="w-fit shadow-xl px-5  h-14 rounded-xl sm:max-h-10 bg-primary text-sec ">
                     Claim Your Link
                   </button>
+                    </Link>
                 </div>
               </Fade>
             </div>

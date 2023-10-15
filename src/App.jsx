@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import logo from "./assets/logo.png";
+import { useLocation,Routes,Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 
 import Navbar from "./components/Navbar";
 
 import { Fade } from "react-awesome-reveal";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
-  const [count, setCount] = useState(0);
+ 
   const [load, setload] = useState(false);
 
 
@@ -30,12 +33,19 @@ function App() {
       {/* <h1 className="hidden sm:block md:block text-5xl text-center mt-96">
         Currently not supported on mobile and tablet devices
       </h1> */}
-      <Navbar />
-    
+      {/* <Navbar /> */}
 
-      <Landing />
+      {/* <Landing /> */}
+      {/* <Login/> */}
 
-      
+      {/* <Signup /> */}
+
+     <Routes>
+        <Route path="/" element={<Landing/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+      </Routes>
+
     </>
   );
 }
