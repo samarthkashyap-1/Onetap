@@ -43,9 +43,11 @@ const [toggle,settoggle]  = useState(false)
 
         <div className="my-auto min-w-[30%] md:w-full md:mx-auto ">
           <ul className="flex justify-between md:flex-col md:gap-5 ">
+            <Link to="/templates">
             <li className="hover:text-sec transition-colors  duration-300 text-center ease-in-out cursor-pointer">
               Templates
             </li>
+            </Link>
             <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
               Discover
             </li>

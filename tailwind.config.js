@@ -24,6 +24,8 @@ export default {
 
     fontFamily: {
       audiowide: ["Audiowide", "sans-serif"],
+      Tilt: ["Tilt Neon", "sans-serif"],
+      pixel: ["Pixelify Sans", "sans-serif"],
     },
   },
   plugins: [],
