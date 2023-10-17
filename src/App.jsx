@@ -21,16 +21,16 @@ function App() {
       setload(true);
     }, 3000);
   });
-  // if (!load) {
-  //   return (
-  //     <div className="h-screen flex justify-center items-center">
-  //       <img src={logo} alt="" className="w-96 animate-pulse" />
-  //     </div>
-  //   );
-  // }
+  if (!load) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <img src={logo} alt="" className="w-96 animate-pulse" />
+      </div>
+    );
+  }
 
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
       {/* <h1 className="hidden sm:block md:block text-5xl text-center mt-96">
         Currently not supported on mobile and tablet devices
       </h1> */}
