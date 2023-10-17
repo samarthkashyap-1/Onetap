@@ -10,6 +10,7 @@ import { Fade } from "react-awesome-reveal";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Templates from "./pages/Templates";
+import Footer from "./components/Footer";
 
 function App() {
  
@@ -43,6 +44,7 @@ function App() {
         
           <Route path="/signup" element={<Signup />} />
       </Routes>
+      <Footer/>
     </div>
   );
 }
