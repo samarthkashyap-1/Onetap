@@ -50,7 +50,7 @@ const CardA = () => {
       }}
     >
       <div className=" md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex   sm:w-full  ">
-        <div className="flex flex-col  gap-8 md:gap-4 w-full   backdrop-blur-lg bg-transparent rounded-2xl items-center p-5  shadow-2xl">
+        <div className="flex flex-col  gap-8 md:gap-4 w-full my-auto  backdrop-blur-lg bg-transparent rounded-2xl items-center p-5  shadow-2xl">
           <img
             src={avatar}
             alt="avatar"
