@@ -25,10 +25,28 @@ const Templates = () => {
       name: "Breeze",
     },
     {
+      id: 5,
+      image: cardetemp,
+      card: CardE,
+      name: "Pixel",
+    },
+    {
       id: 2,
       image: cardbtemp,
       card: CardB,
       name: "Hex",
+    },
+    {
+      id: 7,
+      image: cardgtemp,
+      card: CardG,
+      name: "Peachy",
+    },
+    {
+      id: 6,
+      image: cardftemp,
+      card: CardF,
+      name: "Eco Boy",
     },
     {
       id: 3,
@@ -42,52 +60,37 @@ const Templates = () => {
       card: CardD,
       name: "Bloom",
     },
-    {
-      id: 5,
-      image: cardetemp,
-      card: CardE,
-      name: "Pixel",
-    },
-    {
-      id: 6,
-      image: cardftemp,
-      card: CardF,
-      name: "Eco Boy",
-    },
-    {
-      id: 7,
-      image: cardgtemp,
-      card: CardG,
-      name: "Peachy",
-    },
   ];
 
   return (
-    <div className="min-h-screen px-20 p-10 sm:px-10 ">
+    <div className="min-h-screen px-20 p-10 sm:px-10 -z-10 ">
       <Fade triggerOnce>
-      <Navbar />
-      <div>
-        <h1 className="text-5xl text-primary sm:text-3xl mt-28 ">Templates :-</h1>
-      </div>
-      <div className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 mt-10">
-
-        {cards.map((card) => {
-          return (
-            <Fade triggerOnce>
-            <div className="flex flex-col justify-center items-center border p-2 rounded-lg ">
-              <Link to={`/templates/${card.id}`}>
-                <img
-                  src={card.image}
-                  alt=""
-                  className="w-52 rounded-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-                />
-              </Link>
-              <h1 className="text-2xl mt-4">{card.name}</h1>
-            </div>
-            </Fade>
-          );
-        })}
-      </div>
+        <div>
+          <Navbar />
+          <div>
+            <h1 className="text-5xl text-primary sm:text-3xl mt-28 ">
+              Templates :-
+            </h1>
+          </div>
+          <div className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 mt-10">
+            {cards.map((card) => {
+              return (
+                <Fade triggerOnce>
+                  <div className="flex flex-col justify-center items-center border p-2 rounded-lg ">
+                    <Link to={`/templates/${card.id}`}>
+                      <img
+                        src={card.image}
+                        alt=""
+                        className="w-52 rounded-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                      />
+                    </Link>
+                    <h1 className="text-2xl mt-4">{card.name}</h1>
+                  </div>
+                </Fade>
+              );
+            })}
+          </div>
+        </div>
       </Fade>
     </div>
   );

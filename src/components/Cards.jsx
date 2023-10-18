@@ -42,7 +42,7 @@ const CardA = () => {
   };
   return (
     <div
-      className="bg-gray-200 h-full flex w-full flex-col  justify-center items-center rounded-xl"
+      className="bg-gray-200 h-full flex w-full flex-col  justify-center items-center "
       style={{
         backgroundImage: `url(${cardB})`,
         backgroundPosition: "center",
@@ -120,7 +120,7 @@ const CardB = () => {
   };
   return (
     <div
-      className="h-full flex w-full flex-col justify-center items-center rounded-xl"
+      className="h-full flex w-full flex-col justify-center items-center "
       style={{
         backgroundImage: `url(${cardC})`,
         backgroundPosition: "center",
@@ -206,7 +206,7 @@ const CardC = () => {
   };
   return (
     <div
-      className=" h-full flex w-full flex-col justify-center font-Merri items-center rounded-xl"
+      className=" h-full flex w-full flex-col justify-center font-Merri items-center "
       style={{
         backgroundImage: `url(${cardA})`,
         backgroundPosition: "center",
@@ -292,7 +292,7 @@ const CardD = () => {
   };
   return (
     <div
-      className=" h-full flex w-full flex-col justify-center items-center rounded-xl"
+      className=" h-full flex w-full flex-col justify-center items-center "
       style={{
         backgroundImage: `url(${cardD})`,
         backgroundPosition: "center",
@@ -378,7 +378,7 @@ const CardE = () => {
   };
   return (
     <div
-      className="font-pixel h-full flex w-full flex-col justify-center items-center rounded-xl"
+      className="font-pixel h-full flex w-full flex-col justify-center items-center "
       style={{
         backgroundImage: `url(${pac})`,
         backgroundPosition: "center",
@@ -463,7 +463,7 @@ const CardF = () => {
     );
   };
   return (
-    <div className=" h-full flex w-full flex-col justify-center font-paci bg-[#D7FDD7] items-center rounded-xl">
+    <div className=" h-full flex w-full flex-col justify-center font-paci bg-[#D7FDD7] items-center ">
       <div
         className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex  bg-[#D7FDD7]  sm:w-full  "
         
@@ -535,7 +535,7 @@ const CardG = () => {
     );
   };
   return (
-    <div className=" h-full flex w-full flex-col justify-center font-Merri bg-[#F4AC9A] items-center rounded-xl">
+    <div className=" h-full flex w-full flex-col justify-center font-Merri bg-[#F4AC9A] items-center ">
       <div className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex     sm:w-full  ">
         <div className="flex flex-col gap-8 md:gap-4 w-full my-auto rounded-2xl bg-[#F2EADE] items-center p-5 shadow-2xl shadow-black border border-black ">
           <img
