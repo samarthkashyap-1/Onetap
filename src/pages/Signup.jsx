@@ -21,7 +21,7 @@ const Signup = () => {
     reset()
   };
   return (
-    <div className="flex flex-col gap-10 px-10">
+    <div className="flex flex-col gap h-screen-10 px-10">
       <Fade triggerOnce>
       <Link to="/">
       <div className="absolute flex justify-center top-5 cursor-pointer">
