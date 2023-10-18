@@ -26,6 +26,7 @@ export default {
       audiowide: ["Audiowide", "sans-serif"],
       Tilt: ["Tilt Neon", "sans-serif"],
       pixel: ["Pixelify Sans", "sans-serif"],
+      Merri: ["Merriweather", "sans-serif"],
     },
   },
   plugins: [],

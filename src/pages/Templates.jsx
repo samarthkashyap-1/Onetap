@@ -1,12 +1,12 @@
 import React from 'react'
-import {CardA, CardB , CardC , CardD, CardE} from '../components/Cards'
+import {CardA, CardB , CardC , CardD, CardE, CardF} from '../components/Cards'
 import Navbar from '../components/Navbar';
 import back from "../assets/back.png";
 import {Link} from "react-router-dom"
 import Footer from '../components/Footer';
 
 const Templates = () => {
-  const cards = [CardA, CardB, CardC, CardD, CardE];
+  const cards = [CardA, CardB, CardC, CardD, CardE, CardF];
   return (
     <>
       <Link to="/">
