@@ -1,8 +1,17 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import logo from "./assets/logo.png";
-import { useLocation,Routes,Route } from "react-router-dom";
+import { useLocation,Routes,Route, Outlet } from "react-router-dom";
 import Landing from "./pages/Landing";
+import {
+  CardA,
+  CardB,
+  CardC,
+  CardD,
+  CardE,
+  CardF,
+  CardG,
+} from "./components/Cards";
 
 import Navbar from "./components/Navbar";
 
@@ -11,8 +20,47 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Templates from "./pages/Templates";
 import Footer from "./components/Footer";
+import Template from "./pages/Template";
 
 function App() {
+   const cards = [
+     {
+       id: 1,
+       card: CardA,
+       name: "Breeze",
+     },
+     {
+       id: 2,
+       card: CardB,
+       name: "Hex",
+     },
+     {
+       id: 3,
+       card: CardC,
+       name: "Dear Diary",
+     },
+     {
+       id: 4,
+       card: CardD,
+       name: "Bloom",
+     },
+     {
+       id: 5,
+       card: CardE,
+       name: "Pixel",
+     },
+     {
+       id: 6,
+       card: CardF,
+       name: "Eco Boy",
+     },
+     {
+       id: 7,
+       card: CardG,
+       name: "Peachy",
+     },
+   ];
+
  
   const [load, setload] = useState(false);
 
@@ -35,16 +83,38 @@ function App() {
       {/* <h1 className="hidden sm:block md:block text-5xl text-center mt-96">
         Currently not supported on mobile and tablet devices
       </h1> */}
-      {/* <Templates/> */}
+
       <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/templates" element={<Templates />} />
-        
-          <Route path="/login" element={<Login />} />
-        
-          <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Landing />
+              
+              <Footer /> {/* Include the footer here for non-template routes */}
+            </>
+          }
+        />
+        <Route
+          path="/templates"
+          element={
+            <>
+              <Templates />
+              
+              <Footer /> {/* Include the footer here for non-template routes */}
+            </>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        {cards.map((card) => (
+          <Route
+            key={card.id}
+            path={`templates/${card.id}`}
+            element={<Template Card={card.card} />}
+          />
+        ))}
       </Routes>
-      <Footer/>
     </div>
   );
 }

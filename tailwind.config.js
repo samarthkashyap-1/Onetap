@@ -27,6 +27,8 @@ export default {
       Tilt: ["Tilt Neon", "sans-serif"],
       pixel: ["Pixelify Sans", "sans-serif"],
       Merri: ["Merriweather", "sans-serif"],
+      Dancing: ["Dancing Script", "sans-serif"],
+      paci: ["Pacifico", "sans-serif"],
     },
   },
   plugins: [],

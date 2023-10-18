@@ -80,8 +80,8 @@ const Landing = () => {
       </Fade>
 
       <div className=" px-20 sm:p-5  my-10 sm:px-10 ">
-        <h1 className="text-5xl text-primary my-8">About Us</h1>
-        <p className="text-sec text-2xl mt-8">
+        <h1 className="text-4xl text-primary my-8">About Us</h1>
+        <p className="text-sec px-10 sm:px-0 text-lg mt-8">
           We're dedicated to making your life simpler and more streamlined. With
           "One Tap," you can access all the essential information and resources
           you need in just a single tap. Our commitment is to provide
@@ -90,7 +90,7 @@ const Landing = () => {
       </div>
 
       <div className=" px-20 p-10 sm:p-5 sm:px-10 ">
-        <h1 className="text-5xl text-primary">Reach Us</h1>
+        <h1 className="text-4xl text-primary">Reach Us</h1>
         <div className="">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-4 mt-8">

@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import logo from "../assets/logo.png";
 import ham from "../assets/ham.svg";
 import close from "../assets/close.svg";
-import {Link} from "react-router-dom"
+import {Link, NavLink} from "react-router-dom"
 const Navbar = () => {
 const [toggle,settoggle]  = useState(false)
 
@@ -17,11 +17,13 @@ const [toggle,settoggle]  = useState(false)
         } max-w-[80%] mx-auto mt-10 rounded-xl bg-primary px-5 transition-all duration-300 ease-in-out text-white font-audiowide`}
       >
         <div className=" md:mt-2 sm:mt-4 flex justify-between items-center my-auto">
-          <img
-            src={logo}
-            alt="logo"
-            className=" max-h-20 md:max-h-16 sm:max-h-10"
-          />
+          <Link to="/">
+            <img
+              src={logo}
+              alt="logo"
+              className=" max-h-20 md:max-h-16 sm:max-h-10"
+            />
+          </Link>
           <div className="md:block hidden">
             {toggle ? (
               <img
@@ -43,11 +45,11 @@ const [toggle,settoggle]  = useState(false)
 
         <div className="my-auto min-w-[30%] md:w-full md:mx-auto ">
           <ul className="flex justify-between md:flex-col md:gap-5 ">
-            <Link to="/templates">
-            <li className="hover:text-sec transition-colors  duration-300 text-center ease-in-out cursor-pointer">
-              Templates
-            </li>
-            </Link>
+            <NavLink to="/templates">
+              <li className="hover:text-sec aria-[current=page]:text-blue-400 transition-colors  duration-300 text-center ease-in-out cursor-pointer">
+                Templates
+              </li>
+            </NavLink>
             <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
               Discover
             </li>
