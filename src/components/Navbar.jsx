@@ -1,10 +1,23 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import logo from "../assets/logo.png";
 import ham from "../assets/ham.svg";
 import close from "../assets/close.svg";
 import {Link, NavLink} from "react-router-dom"
 const Navbar = () => {
 const [toggle,settoggle]  = useState(false)
+ const [prevScrollPos, setPrevScrollPos] = useState(0);
+ const [visible, setVisible] = useState(true);
+
+ useEffect(() => {
+   const handleScroll = () => {
+     const currentScrollPos = window.scrollY;
+     setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 50);
+     setPrevScrollPos(currentScrollPos);
+   };
+
+   window.addEventListener("scroll", handleScroll);
+   return () => window.removeEventListener("scroll", handleScroll);
+ }, [prevScrollPos]);
 
 
 
@@ -14,6 +27,8 @@ const [toggle,settoggle]  = useState(false)
       <nav
         className={` fixed z-50 shadow-xl  flex h-20 top-0 md:gap-5  left-0 right-0 justify-between md:flex-col md:overflow-y-hidden ${
           toggle ? "md:h-72 sm:h-72 md:pb-10 " : "h-20"
+        } ${
+          visible ? "translate-y-0" : "-translate-y-36"
         } max-w-[80%] mx-auto mt-10 rounded-xl bg-primary px-5 transition-all duration-300 ease-in-out text-white font-audiowide`}
       >
         <div className=" md:mt-2 sm:mt-4 flex justify-between items-center my-auto">

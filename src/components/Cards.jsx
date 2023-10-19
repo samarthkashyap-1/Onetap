@@ -101,11 +101,11 @@ const CardA = () => {
 const CardB = () => {
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
-      <div className="w-full justify-center flex px-4 relative py-2 bg-white  text-primary hover:-translate-y-1   rounded-md text-center font-semibold hover:bg-[#7C828A] cursor-pointer hover:text-white transition duration-300">
+      <div className="w-full justify-center group flex px-4 relative py-2 bg-white  text-primary hover:-translate-y-1   rounded-md text-center font-semibold hover:bg-[#7C828A] cursor-pointer hover:text-white transition duration-300">
         <img
           src={btnlogo}
           alt=""
-          className="w-8 absolute  mr-auto top-1 left-2"
+          className="w-8 absolute group-hover:invert  mr-auto top-1 left-2"
         />
         <a
           href={url}
@@ -176,7 +176,7 @@ const CardB = () => {
             />
           </div>
           <div className="mt-auto">
-            <img src={logowhite} alt="" className="w-20 mx-auto " />
+            <img src={logoblack} alt="" className="w-20 mx-auto " />
           </div>
         </div>
       </div>
@@ -273,11 +273,11 @@ const CardC = () => {
 const CardD = () => {
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
-      <div className="w-full justify-center flex px-4 relative py-2 bg-white hover:-translate-y-1  text-primary   rounded-md text-center font-semibold hover:bg-[#663C92] cursor-pointer hover:text-white transition duration-300">
+      <div className="w-full justify-center group flex px-4 relative py-2 bg-white hover:-translate-y-1  text-primary   rounded-md text-center font-semibold hover:bg-[#663C92] cursor-pointer hover:text-white transition duration-300">
         <img
           src={btnlogo}
           alt=""
-          className="w-8 absolute  mr-auto top-1 left-2"
+          className="w-8 absolute group-hover:invert  mr-auto top-1 left-2"
         />
         <a
           href={url}
