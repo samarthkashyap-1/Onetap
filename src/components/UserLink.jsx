@@ -48,7 +48,9 @@ const UserLink = ({ setData }) => {
           <option value="pinterest">Pinterest</option>
         </select>
         {errors.platform && (
-          <p className="text-red-500">{errors.platform.message}</p>
+          <p className="text-red-500 text-xs sm:text-center">
+            {errors.platform.message}
+          </p>
         )}
       </div>
       <div className="flex-grow">
@@ -57,12 +59,21 @@ const UserLink = ({ setData }) => {
           name=""
           id=""
           placeholder="Enter Link"
-          className=" block p-2 border rounded-md w-full shadow-lg"
+          className=" block p-2 border rounded-md w-full outline-sec shadow-lg"
           {...Link("link", {
             required: "link is required",
           })}
         />
-        {errors.link && <p className="text-red-500">{errors.link.message}</p>}
+        {errors.link && (
+          <p className="text-red-500 text-xs sm:text-center">
+            {errors.link.message}
+          </p>
+        )}
+      </div>
+      <div className="flex">
+        <button className="bg-primary px-5 py-3 sm:mx-auto  text-white rounded-lg">
+          Submit
+        </button>
       </div>
     </form>
   );

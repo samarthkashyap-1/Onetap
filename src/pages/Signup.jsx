@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import { useForm} from "react-hook-form";
 import { Link } from "react-router-dom";
 import showpass from "../assets/showpass.png";
 import  back from "../assets/back.png";
 import { Fade } from "react-awesome-reveal";
+import axios from "axios";
+import Toast from "./Toast";
+import { toast } from "react-toastify";
 const Signup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -18,10 +21,30 @@ const Signup = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    reset()
+    postuser(data);
+    
   };
+
+  const postuser = async (data) => {
+    const res = await axios.post("http://localhost:3001/user", data);
+    const user = res.data;
+    toast.success("Signed up Successfully");
+    navigate("/login");
+    reset();
+    console.log(user);
+  }
+  
+  useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem("auth"));
+    if (auth) {
+      navigate("/admin");
+    }
+  }
+  , []);
+
   return (
     <div className="flex flex-col gap-10 h-screen px-10">
+      <Toast/>
       <Fade triggerOnce>
         <Link to="/">
           <div className="absolute flex justify-center z-10 top-5 cursor-pointer">

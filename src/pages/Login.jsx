@@ -1,19 +1,25 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import logo from "../assets/logo.png";
 import { useForm } from "react-hook-form";
 import showpass from "../assets/showpass.png";
 import { Link } from "react-router-dom";
 import back from "../assets/back.png";
 import { Fade } from "react-awesome-reveal";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Toast from './Toast';
 
 const Login = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const navigate = useNavigate();
   
 
     const togglePasswordVisibility = () => {
       setPasswordVisible(!passwordVisible);
     };
 
+    
 
        const {
          register: Logindetail,
@@ -23,10 +29,45 @@ const Login = () => {
 
        const onSubmit = (data) => {
          console.log(data);
-         reset();
+         loginuser(data);
        };
+
+       const loginuser = async (data) => {
+        const res = await axios.get("http://localhost:3001/user");
+        const user = res.data;
+       
+        const log = user.filter((item) => {
+          return item.email == data.email && item.password == data.password;
+        });
+        
+        if (log.length == 0) {
+         return toast.error("Invalid Credentials");
+        } else {
+          // Inside a component or event handler
+          toast.success("Logged in Successfully");
+        }
+        const token = {
+          auth: true,
+          email: data.email,
+          
+        }
+        localStorage.setItem("auth", JSON.stringify(token));
+        reset();
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+       
+      }
+
+      useEffect(() => {
+        const auth = localStorage.getItem("auth");
+        if (auth) {
+          navigate("/");
+        }
+      }, []);
   return (
     <div className="flex flex-col gap-10 h-screen px-10">
+      <Toast/>
       <Fade triggerOnce>
         <Link to="/">
           <div className="absolute flex justify-center top-5 cursor-pointer">

@@ -16,10 +16,13 @@ import youtube from "../assets/youtube.svg";
 import pinterest from "../assets/pinterest.svg";
 import twitch from "../assets/twitch.svg";
 import pac from "../assets/pac.jpg";
-import portfolio from "../assets/portfolio.png"
-import logoblack from "../assets/logoblack.png"
-import cardG from "../assets/cardG.png"
+import portfolio from "../assets/portfolio.png";
+import logoblack from "../assets/logoblack.png";
+import cardG from "../assets/cardG.png";
 import { Link } from "react-router-dom";
+import share from "../assets/share.svg";
+  import { ToastContainer, toast } from "react-toastify";
+  import "react-toastify/dist/ReactToastify.css";
 
 const demo = {
   username: "John",
@@ -43,15 +46,18 @@ const demo = {
       url: "https://linkedin.com",
     },
     {
-
-
       platform: "behance",
-      url: "https://behance.com"
+      url: "https://behance.com",
     },
   ],
   card: 1,
 };
-
+const notify = () =>
+  toast.success("Link Copied!", {
+    autoClose: 1000,
+    hideProgressBar: true,
+    closeOnClick: true,
+  });
 
 const logos = {
   x: x,
@@ -64,8 +70,8 @@ const logos = {
   portfolio: portfolio,
   twitch: twitch,
 };
-const CardA = ({user}) => {
-  console.log(user)
+const CardA = ({ user }) => {
+  console.log(user);
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center flex px-4 relative py-2 bg-white  text-primary   rounded-md text-center font-semibold hover:bg-[#637A88] cursor-pointer hover:text-white transition duration-300">
@@ -95,18 +101,29 @@ const CardA = ({user}) => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <ToastContainer />
+
       <div className=" md:p-4 rounded-lg min-h-screen  font-Dancing w-1/4 md:w-1/2 p-5 flex   sm:w-full  ">
-        <div className="flex flex-col  gap-8 md:gap-4 w-full my-auto  backdrop-blur-lg bg-transparent rounded-2xl items-center p-5  shadow-2xl">
+        <div className="flex flex-col relative   gap-8 md:gap-4 w-full my-auto  backdrop-blur-lg bg-transparent rounded-2xl items-center p-5  shadow-2xl">
+          <img
+            src={share}
+            alt=""
+            className="invert absolute top-0 right-0 scale-50 ml-auto cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              notify();
+            }}
+          />
           <img
             src={user ? user.avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 rounded-full  sm:w-1/3 md:w-1/3 border-2 border-white"
           />
           <div className="flex text-white flex-col text-center gap-2">
-            <h2 className="text-2xl font-semibold ">
+            <h2 className="text-2xl">
               @{user ? user.username : demo.username}
             </h2>
-            <a href="mailto: abc@example.com" className="text-lg">
+            <a href="mailto: abc@example.com" className="text-sm">
               {user ? user.email : demo.email}
             </a>
           </div>
@@ -123,8 +140,8 @@ const CardA = ({user}) => {
             })}
           </div>
           <div className="mt-auto">
-            <Link to='/'>
-            <img src={logowhite} alt="" className="w-20 mx-auto" />
+            <Link to="/">
+              <img src={logowhite} alt="" className="w-20 mx-auto" />
             </Link>
           </div>
         </div>
@@ -133,7 +150,7 @@ const CardA = ({user}) => {
   );
 };
 
-const CardB = ({user}) => {
+const CardB = ({ user }) => {
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center group flex px-4 relative py-2 bg-white  text-primary hover:-translate-y-1   rounded-md text-center font-semibold hover:bg-[#7C828A] cursor-pointer hover:text-white transition duration-300">
@@ -163,9 +180,10 @@ const CardB = ({user}) => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <ToastContainer />
       <div className=" md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex   sm:w-full  ">
         <div
-          className="flex flex-col  gap-8 md:gap-4 w-full my-auto  backdrop-blur-lg rounded-2xl items-center p-5 shadow-2xl border border-[#7C828A] shadow-[#7C828A]"
+          className="flex flex-col relative  gap-8 md:gap-4 w-full my-auto  backdrop-blur-lg rounded-2xl items-center p-5 shadow-2xl border border-[#7C828A] shadow-[#7C828A]"
           style={{
             backgroundImage: `url(${cardC})`,
             backgroundPosition: "center",
@@ -174,15 +192,22 @@ const CardB = ({user}) => {
           }}
         >
           <img
+            src={share}
+            alt=""
+            className="absolute top-0 right-0 scale-50 ml-auto cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              notify();
+            }}
+          />
+          <img
             src={user ? user.avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 sm:w-1/3 md:w-1/4 rounded-full border-2 border-[#7C828A]"
           />
           <div className="flex  flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">
-              @{user ? user.username : demo.username}
-            </h2>
-            <a href="mailto: abc@example.com" className="text-lg">
+            <h2 className="text-xl">@{user ? user.username : demo.username}</h2>
+            <a href="mailto: abc@example.com" className="text-sm">
               {user ? user.email : demo.email}
             </a>
           </div>
@@ -199,10 +224,9 @@ const CardB = ({user}) => {
             })}
           </div>
           <Link to="/">
-
-          <div className="mt-auto">
-            <img src={logoblack} alt="" className="w-20 mx-auto " />
-          </div>
+            <div className="mt-auto">
+              <img src={logoblack} alt="" className="w-20 mx-auto " />
+            </div>
           </Link>
         </div>
       </div>
@@ -240,9 +264,10 @@ const CardC = ({ user }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <ToastContainer />
       <div className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex   sm:w-full ">
         <div
-          className="flex flex-col  gap-8 md:gap-4 w-full my-auto   backdrop-blur-lg rounded-2xl items-center p-5     shadow shadow-white"
+          className="flex flex-col relative gap-8 md:gap-4 w-full my-auto   backdrop-blur-lg rounded-2xl items-center p-5     shadow shadow-white"
           style={{
             backgroundImage: `url(${cardA})`,
             backgroundPosition: "center",
@@ -251,15 +276,22 @@ const CardC = ({ user }) => {
           }}
         >
           <img
+            src={share}
+            alt=""
+            className="invert absolute top-0 right-0 scale-50 ml-auto cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              notify();
+            }}
+          />
+          <img
             src={user ? user.avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 sm:w-1/3 md:w-1/4 rounded-full border-2 border-white"
           />
           <div className="flex text-white flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">
-              @{user ? user.username : demo.username}
-            </h2>
-            <a href="mailto: abc@example.com" className="text-lg">
+            <h2 className="text-xl">@{user ? user.username : demo.username}</h2>
+            <a href="mailto: abc@example.com" className="text-sm">
               {user ? user.email : demo.email}
             </a>
           </div>
@@ -276,10 +308,9 @@ const CardC = ({ user }) => {
             })}
           </div>
           <Link to="/">
-
-          <div className="mt-auto">
-            <img src={logowhite} alt="" className="w-20 mx-auto " />
-          </div>
+            <div className="mt-auto">
+              <img src={logowhite} alt="" className="w-20 mx-auto " />
+            </div>
           </Link>
         </div>
       </div>
@@ -317,9 +348,10 @@ const CardD = ({ user }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <ToastContainer />
       <div className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex   sm:w-full ">
         <div
-          className="flex flex-col  gap-8 md:gap-4 w-full my-auto rounded-2xl items-center p-5 shadow shadow-[#663C92]"
+          className="flex flex-col gap-8 md:gap-4 w-full my-auto rounded-2xl items-center relative p-5 shadow shadow-[#663C92]"
           style={{
             backgroundImage: `url(${cardD})`,
             backgroundPosition: "center",
@@ -328,15 +360,22 @@ const CardD = ({ user }) => {
           }}
         >
           <img
+            src={share}
+            alt=""
+            className="invert absolute top-0 right-0 scale-50 ml-auto cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              notify();
+            }}
+          />
+          <img
             src={user ? user.avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 md:w-1/4 sm:w-1/3 rounded-full border-2 border-[#663C92]"
           />
           <div className="flex text-white flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">
-              @{user ? user.username : demo.username}
-            </h2>
-            <a href="mailto: abc@example.com" className="text-lg">
+            <h2 className="text-xl">@{user ? user.username : demo.username}</h2>
+            <a href="mailto: abc@example.com" className="text-sm">
               {user ? user.email : demo.email}
             </a>
           </div>
@@ -353,10 +392,9 @@ const CardD = ({ user }) => {
             })}
           </div>
           <Link to="/">
-
-          <div className="mt-auto">
-            <img src={logowhite} alt="" className="w-20 mx-auto " />
-          </div>
+            <div className="mt-auto">
+              <img src={logowhite} alt="" className="w-20 mx-auto " />
+            </div>
           </Link>
         </div>
       </div>
@@ -394,9 +432,10 @@ const CardE = ({ user }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <ToastContainer />
       <div className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex   sm:w-full  ">
         <div
-          className="flex flex-col gap-8 md:gap-4 w-full my-auto rounded-2xl items-center p-5 shadow shadow-[#0AFFFF] "
+          className="flex flex-col gap-8 md:gap-4 w-full my-auto rounded-2xl items-center relative p-5 shadow shadow-[#0AFFFF] "
           style={{
             backgroundImage: `url(${pac})`,
             backgroundPosition: "center",
@@ -405,15 +444,22 @@ const CardE = ({ user }) => {
           }}
         >
           <img
+            src={share}
+            alt=""
+            className="invert absolute top-0 right-0 scale-50 ml-auto cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              notify();
+            }}
+          />
+          <img
             src={user ? user.avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2  md:w-1/4 sm:w-1/3 rounded-full border-2 border-[#0AFFFF]"
           />
           <div className="flex text-white flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">
-              @{user ? user.username : demo.username}
-            </h2>
-            <a href="mailto: abc@example.com" className="text-lg">
+            <h2 className="text-xl">@{user ? user.username : demo.username}</h2>
+            <a href="mailto: abc@example.com" className="text-sm">
               {user ? user.email : demo.email}
             </a>
           </div>
@@ -430,10 +476,9 @@ const CardE = ({ user }) => {
             })}
           </div>
           <Link to="/">
-
-          <div className="mt-auto">
-            <img src={logowhite} alt="" className="w-20 mx-auto " />
-          </div>
+            <div className="mt-auto">
+              <img src={logowhite} alt="" className="w-20 mx-auto " />
+            </div>
           </Link>
         </div>
       </div>
@@ -463,18 +508,26 @@ const CardF = ({ user }) => {
   };
   return (
     <div className=" h-full flex w-full flex-col justify-center font-paci bg-[#D7FDD7] items-center ">
+      <ToastContainer />
       <div className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex  bg-[#D7FDD7]  sm:w-full  ">
-        <div className="flex flex-col gap-8 md:gap-4 w-full my-auto rounded-2xl items-center p-5 shadow-2xl shadow-[#64a164] ">
+        <div className="flex flex-col gap-8 md:gap-4 w-full my-auto rounded-2xl items-center relative p-5 shadow-2xl shadow-[#64a164] ">
+          <img
+            src={share}
+            alt=""
+            className=" absolute top-0 right-0 scale-50 ml-auto cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              notify();
+            }}
+          />
           <img
             src={user ? user.avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 sm:w-1/3 md:w-1/4 rounded-full border-2 border-black shadow-xl"
           />
           <div className="flex  flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">
-              @{user ? user.username : demo.username}
-            </h2>
-            <a href="mailto: abc@example.com" className="text-lg">
+            <h2 className="text-xl">@{user ? user.username : demo.username}</h2>
+            <a href="mailto: abc@example.com" className="text-sm">
               {user ? user.email : demo.email}
             </a>
           </div>
@@ -491,10 +544,9 @@ const CardF = ({ user }) => {
             })}
           </div>
           <Link to="/">
-
-          <div className="mt-auto">
-            <img src={logoblack} alt="" className="w-20 mx-auto " />
-          </div>
+            <div className="mt-auto">
+              <img src={logoblack} alt="" className="w-20 mx-auto " />
+            </div>
           </Link>
         </div>
       </div>
@@ -523,18 +575,26 @@ const CardG = ({ user }) => {
   };
   return (
     <div className=" h-full flex w-full flex-col justify-center font-Merri bg-[#F4AC9A] items-center ">
+      <ToastContainer />
       <div className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex     sm:w-full  ">
-        <div className="flex flex-col gap-8 md:gap-4 w-full my-auto rounded-2xl bg-[#F2EADE] items-center p-5 shadow-2xl shadow-black border border-black ">
+        <div className="flex flex-col relative gap-8 md:gap-4 w-full my-auto rounded-2xl bg-[#F2EADE] items-center p-5 shadow-2xl shadow-black border border-black ">
+          <img
+            src={share}
+            alt=""
+            className=" absolute top-0 right-0 scale-50  ml-auto cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              notify();
+            }}
+          />
           <img
             src={user ? user.avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 md:w-1/4 sm:w-1/3 rounded-full border-2 border-[rgba(43,42,37,1)] shadow-xl"
           />
           <div className="flex text-[rgba(43,42,37,1)] flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">
-              @{user ? user.username : demo.username}
-            </h2>
-            <a href="mailto: abc@example.com" className="text-lg">
+            <h2 className="text-xl">@{user ? user.username : demo.username}</h2>
+            <a href="mailto: abc@example.com" className="text-sm">
               {user ? user.email : demo.email}
             </a>
           </div>
@@ -550,10 +610,9 @@ const CardG = ({ user }) => {
               );
             })}
             <Link to="/">
-
-            <div className="mt-auto">
-              <img src={logoblack} alt="" className="w-20 mx-auto " />
-            </div>
+              <div className="mt-auto">
+                <img src={logoblack} alt="" className="w-20 mx-auto " />
+              </div>
             </Link>
           </div>
         </div>
@@ -562,5 +621,4 @@ const CardG = ({ user }) => {
   );
 };
 
-
-export { CardA, CardB, CardC, CardD, CardE, CardF, CardG};
+export { CardA, CardB, CardC, CardD, CardE, CardF, CardG };

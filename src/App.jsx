@@ -1,17 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useForm } from "react-hook-form";
 import logo from "./assets/logo.png";
 import { useLocation,Routes,Route, Outlet } from "react-router-dom";
 import Landing from "./pages/Landing";
-import {
-  CardA,
-  CardB,
-  CardC,
-  CardD,
-  CardE,
-  CardF,
-  CardG,
-} from "./components/Cards";
+
+import axios from "axios";
 
 import Navbar from "./components/Navbar";
 
@@ -24,59 +17,49 @@ import Template from "./pages/Template";
 import Admin from "./pages/Admin";
 import Display from "./pages/Display";
 import Error from "./pages/Error";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 function App() {
-const [Profiles, setProfiles] = useState([]);
-// const Profile = JSON.parse(localStorage.getItem("profile"));
+  // const Profile = JSON.parse(localStorage.getItem("profile"));
+  const navigate = useNavigate();
+  const [auth, setAuth] = useState(false);
+  const location = useLocation();
+  const [load, setLoad] = useState(false);
 
+  // First useEffect to set 'load' to true after 3 seconds
+  useEffect(() => {
+    setTimeout(() => {
+      setLoad(true);
+    }, 2000);
+  }, []);
 
-   const cards = [
-     {
-       id: 1,
-       card: CardA,
-       name: "Breeze",
-     },
-     {
-       id: 2,
-       card: CardB,
-       name: "Hex",
-     },
-     {
-       id: 3,
-       card: CardC,
-       name: "Dear Diary",
-     },
-     {
-       id: 4,
-       card: CardD,
-       name: "Bloom",
-     },
-     {
-       id: 5,
-       card: CardE,
-       name: "Pixel",
-     },
-     {
-       id: 6,
-       card: CardF,
-       name: "Eco Boy",
-     },
-     {
-       id: 7,
-       card: CardG,
-       name: "Peachy",
-     },
-   ];
+  // Second useEffect to retrieve 'profiles' from localStorage
+  const [profiles, setProfiles] = useState([]);
+  useEffect(() => {
 
- 
-  const [load, setload] = useState(false);
+    // const storedProfiles = JSON.parse(localStorage.getItem("profiles"));
+    const storedProfiles = async () => {
+      const res = await axios.get("http://localhost:3001/profiles");
+      const data = res.data;
+      setProfiles(data);
+    };
+    storedProfiles();
+    console.log(profiles);
+   
+    
+  }, [location.pathname]);
 
 
   useEffect(() => {
-    setTimeout(() => {
-      setload(true);
-    }, 3000);
-  });
+    const auth = JSON.parse(localStorage.getItem("auth"));
+    if (auth) {
+      setAuth(true);
+    }
+    console.log(auth);
+  }, []);
+
   if (!load) {
     return (
       <div className="h-screen flex justify-center items-center">
@@ -85,12 +68,7 @@ const [Profiles, setProfiles] = useState([]);
     );
   }
 
-  useEffect(() => {
-    
-    setProfiles(prev=>JSON.parse(localStorage.getItem("profiles")));
-    console.log(Profiles);
-  }
-  , [localStorage])
+  // Rest of your component code that uses 'profiles'
 
   return (
     <div className="min-h-screen">
@@ -99,18 +77,12 @@ const [Profiles, setProfiles] = useState([]);
       </h1> */}
 
       <Routes>
-        {Profiles.map((profile) => (
-          <Route
-            key={profile.index}
-            path={`${profile.username}`}
-            element={<Display Profile={profile} />}
-          />
-        ))}
+        <Route path="/:username" element={<Display Profiles={profiles} />} />
         <Route
           path="/"
           element={
             <>
-              <Landing />
+              <Landing auth={auth} setAuth={setAuth} />
               <Footer /> {/* Include the footer here for non-template routes */}
             </>
           }
@@ -119,21 +91,15 @@ const [Profiles, setProfiles] = useState([]);
           path="/templates"
           element={
             <>
-              <Templates />
+              <Templates auth={auth} setAuth={setAuth} />
               <Footer /> {/* Include the footer here for non-template routes */}
             </>
           }
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<Admin />} />
-        {cards.map((card) => (
-          <Route
-            key={card.id}
-            path={`templates/${card.id}`}
-            element={<Template Card={card.card} />}
-          />
-        ))}
+        <Route path="/admin" element={<Admin allprofile={profiles} />} />
+        <Route path="/templates/:id" element={<Template />} />
 
         <Route path="*" element={<Error />} />
       </Routes>

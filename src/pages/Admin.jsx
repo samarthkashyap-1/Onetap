@@ -23,10 +23,24 @@ import cardftemp from "../assets/cardftemp.png";
 import cardgtemp from "../assets/cardgtemp.png";
 import { Fade } from "react-awesome-reveal";
 import { set } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
+import axios from "axios";
+import Toast from "./Toast";
+import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
-const Admin = () => {
+
+
+const Admin = ({ allprofile }) => {
+  const location = useLocation();
+   
   const navigate = useNavigate();
+     useEffect(() => {
+       if (!localStorage.getItem("auth")) {
+         navigate("/login");
+       }
+     }, [location.pathname]);
+
   const [unique, setunique] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -43,10 +57,10 @@ const Admin = () => {
   const [username, setUsername] = useState("");
   const [usercard, setUsercard] = useState("");
   const [Profile, setProfile] = useState([]);
+  const [existuser, setexistuser] = useState();
   const handleAvatarSelect = (avatar) => {
     setSelectedAvatar(avatar);
   };
-  const [Profiles, setProfiles] = useState([]);
 
   const cards = [
     {
@@ -98,50 +112,103 @@ const Admin = () => {
     twitch: twitch,
   };
 
-  const completeprofile = () => {
-    let profile = {
+  const completeprofile = async () => {
+    const profile = {
       username: username.replace(/\s/g, ""),
       avatar: selectedAvatar,
+      email: JSON.parse(localStorage.getItem("auth")).email?.email,
       links: data,
       card: usercard,
     };
 
-    // setProfile(profile)
-    setProfile((prev) => [...prev, profile]);
+    if (existuser) {
+     await patchdata(profile);
+     toast.success("Profile Updated Successfully");
+    }
+    else{
+      await postdata(profile);
+      toast.success("Profile Created Successfully");
+    }
 
-    console.log(Profile);
+    
 
     setUsername("");
     setSelectedAvatar("");
     setData([]);
     setCurrentStep(1);
-
-    // navigate(`/${username}`)
   };
-  useEffect(() => {
-    localStorage.setItem("profiles", JSON.stringify(Profile));
-  }, [Profile]);
+
+
+  const patchdata = async (profile) => {
+   try{
+         const res = await axios.patch(
+      `http://localhost:3001/profiles/${existuser.id}`,
+      profile
+    );
+    const data = res.data;
+     toast.success("Profile Updated Successfully");
+    window.open(`/${profile.username}`, "_blank");
+   }
+    catch(error){
+      toast.error("Something went wrong");
+    }
+
+  }
+
+  const checkuserexist = () => {
+   const email= JSON.parse(localStorage.getItem("auth"))?.email;
+   const finduser = allprofile.find((profile) => profile.email === email);
+   if(finduser){
+     setexistuser(finduser);
+    setData(prev=>finduser.links);
+   }
+  }
+
+  const postdata = async (profile) => {
+   try{
+     const res = await axios.post("http://localhost:3001/profiles", profile);
+    const data = res.data;
+    toast.success("Profile Updated Successfully");
+    window.open(`/${profile.username}`, "_blank");
+   }
+   catch(error){
+
+     toast.error("Something went wrong");
+   }
+  };
 
   const deletelink = (id) => {
     setData((prev) => prev.filter((d) => d.id !== id));
   };
 
-  useEffect(() => {
-    setProfiles((prev) => JSON.parse(localStorage.getItem("profiles")));
-    console.log(Profiles);
-  }, [localStorage]);
+
+   useEffect(() => {
+    checkuserexist();
+   }, []);
 
   useEffect(() => {
+    
     if (username === "" || username === null || username === undefined) {
       setunique(false);
       return;
     }
-    const isUnique = !Profiles.some((profile) => profile.username === username);
+    const isUnique = !allprofile.some(
+      (profile) => profile.username === username
+    );
     setunique(isUnique);
-  }, [username, Profiles]);
 
+  // create a logic if the username is same as the previous one then it should be unique
+  if (existuser) {
+    if (existuser.username === username) {
+      setunique(true);
+    }}
+  }, [username, allprofile])
+
+  
+ 
   return (
     <div className="sm:py-10">
+      <Toast />
       {currentStep <= 1 && (
         <Link to="/">
           <div className="absolute flex justify-center top-5 cursor-pointer">
@@ -162,35 +229,44 @@ const Admin = () => {
             <div className=" p-8 rounded ">
               <h1 className="text-4xl font-semibold mb-4">Hey there!!!</h1>
               <div>
-
+                <input
+                  type="text"
+                  placeholder="Create a username"
+                  className=" block p-3 border-2 rounded-md w-full my-5 outline-sec"
+                  defaultValue={existuser ? existuser.username : username}
+                  onChange={(e) => setUsername((prev) => e.target.value)}
+                />
+                {!unique ? (
+                  <p className="text-red-600 text-xs">Be yourself, Be unique</p>
+                ) : (
+                  <p className="text-green-600 text-xs">Awesome</p>
+                )}
+              </div>
+            </div>
+            <AvatarSelector onAvatarSelect={handleAvatarSelect} />
+            <div className="px-8">
               <input
                 type="text"
                 placeholder="Create a username"
                 className=" block p-3 border-2 rounded-md w-full my-5 outline-sec"
-                value={username}
+                defaultValue={JSON.parse(localStorage.getItem("auth"))?.email}
                 onChange={(e) => setUsername((prev) => e.target.value)}
-                />
-            {!unique ? (
-              <p className="text-red-600 text-xs">Be yourself, Be unique</p>
-              ) : (
-                <p className="text-green-600 text-xs">Awesome</p>
-                )}
-                </div>
-                </div>
-            <AvatarSelector onAvatarSelect={handleAvatarSelect} />
+                readOnly
+              />
+            </div>
           </div>
 
           <div className="flex-1 mb-auto">
             <UserLink setData={setData} />
             {data.map((d) => {
               return (
-                <div className="flex justify-between p-2 border-b gap-2">
+                <div className="flex justify-between p-2 w-full border-b gap-2 sm:gap-1">
                   <img
                     src={logos[d.platform]}
                     alt=""
                     className=" scale-75 sm:scale-50"
                   />
-                  <p className="my-auto text-md sm:text-xs truncate">
+                  <p className="my-auto text-md sm:text-xs truncate text-ellipsis w-96 sm:w-36">
                     {d.link}
                   </p>
                   <button

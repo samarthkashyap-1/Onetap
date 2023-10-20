@@ -12,28 +12,32 @@ import blob from "../assets/blob.svg";
 import demo from "../assets/landing.png";
 import { Fade } from "react-awesome-reveal";
 import Footer from '../components/Footer';
+import Toast from './Toast';
 
-const Landing = () => {
-    const {
-  register,
-  handleSubmit,reset,
-  formState: { errors },
-} = useForm();
+const Landing = ({ auth, setAuth }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
     reset();
   };
+  console.log(auth);
   return (
     <div className="">
+      <Toast/>
       <Fade triggerOnce>
         <header
           className=" bg-cover bg-no-repeat "
           style={{
-              backgroundImage: `url(${wave})`,
-            }}
-            >
-            <Navbar/>
+            backgroundImage: `url(${wave})`,
+          }}
+        >
+          <Navbar auth={auth} setAuth={setAuth} />
           <div className="h-screen px-20 sm:px-10 flex ">
             <div className=" mt-40 text-primary flex-1">
               <Fade triggerOnce>
@@ -51,11 +55,11 @@ const Landing = () => {
                   Where Streamlining and Simplifying are Just One Tap Away!{" "}
                 </h1>
                 <div className="mt-12">
-                    <Link to="/login">
-                  <button className="w-fit shadow-xl px-5  h-14 rounded-xl sm:max-h-10 bg-primary text-sec ">
-                    Claim Your Link
-                  </button>
-                    </Link>
+                  <Link to={`${!auth?"/login":"/admin"}`}>
+                    <button className="w-fit shadow-xl px-5  h-14 rounded-xl sm:max-h-10 bg-primary text-sec ">
+                      Claim Your Link
+                    </button>
+                  </Link>
                 </div>
               </Fade>
             </div>
@@ -95,50 +99,49 @@ const Landing = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-4 mt-8">
               <div className="flex flex-col gap-4 w-1/2 md:w-full mx-auto">
-                
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    className=" h-14 rounded-lg bg-white px-4 border-2 border-primary"
-                    {...register("name", {
-                      required: "Name is required",
-                    })}
-                  />
-                  {errors.name && (
-                    <p className="text-red-500">{errors.name.message}</p>
-                  )}
-                  <input
-                    type="text"
-                    placeholder="Email"
-                    className=" h-14 rounded-lg  bg-white px-4 border-2 border-primary"
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                        message: "Email is not valid.",
-                      },
-                    })}
-                  />
-                  {errors.email && (
-                    <p className="text-red-500">{errors.email.message}</p>
-                  )}
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className=" h-14 rounded-lg bg-white px-4 border-2 border-primary"
+                  {...register("name", {
+                    required: "Name is required",
+                  })}
+                />
+                {errors.name && (
+                  <p className="text-red-500">{errors.name.message}</p>
+                )}
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className=" h-14 rounded-lg  bg-white px-4 border-2 border-primary"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                      message: "Email is not valid.",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <p className="text-red-500">{errors.email.message}</p>
+                )}
 
-                  <textarea
-                    name=""
-                    id=""
-                    cols="30"
-                    rows="10"
-                    placeholder="Message"
-                    className="w-full h-40 rounded-lg bg-white p-4 border-2 border-primary"
-                    {...register("message", {
-                      required: "Message is required",
-                    })}
-                  ></textarea>
-                  {errors.message && (
-                    <p className="text-red-500">{errors.message.message}</p>
-                  )}
-                </div>
-              
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                  placeholder="Message"
+                  className="w-full h-40 rounded-lg bg-white p-4 border-2 border-primary"
+                  {...register("message", {
+                    required: "Message is required",
+                  })}
+                ></textarea>
+                {errors.message && (
+                  <p className="text-red-500">{errors.message.message}</p>
+                )}
+              </div>
+
               <div className="flex justify-end w-1/2 mx-auto">
                 <button className="w-40 h-14 rounded-xl bg-sec text-white">
                   Send
@@ -148,10 +151,8 @@ const Landing = () => {
           </form>
         </div>
       </div>
-
-      
     </div>
   );
-}
+};
 
 export default Landing

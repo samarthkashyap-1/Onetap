@@ -3,11 +3,12 @@ import logo from "../assets/logo.png";
 import ham from "../assets/ham.svg";
 import close from "../assets/close.svg";
 import {Link, NavLink} from "react-router-dom"
-const Navbar = () => {
+
+const Navbar = ({auth,setAuth}) => {
 const [toggle,settoggle]  = useState(false)
  const [prevScrollPos, setPrevScrollPos] = useState(0);
  const [visible, setVisible] = useState(true);
-
+const [authcheck, setauthcheck] = useState(false)
  useEffect(() => {
    const handleScroll = () => {
      const currentScrollPos = window.scrollY;
@@ -19,6 +20,14 @@ const [toggle,settoggle]  = useState(false)
    return () => window.removeEventListener("scroll", handleScroll);
  }, [prevScrollPos]);
 
+  useEffect(() => {
+
+    const a = JSON.parse(localStorage.getItem("auth"));
+    if (a) {
+      setauthcheck(true);
+    }
+  
+  }, []);
 
 
 
@@ -75,6 +84,7 @@ const [toggle,settoggle]  = useState(false)
         </div>
         <div className="my-auto w-[20%] md:w-full">
           <ul className="flex justify-evenly ">
+            {!authcheck ? <>
             <Link to="/login">
               <li>
                 <button className="px-5 sm:px-0  sm:w-20 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
@@ -89,6 +99,30 @@ const [toggle,settoggle]  = useState(false)
                 </button>
               </li>
             </Link>
+            </>
+            :
+            <>
+            <Link to="/admin">
+              <li>
+                <button className="px-5 sm:px-0  sm:w-20 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
+                  Admin
+                </button>
+              </li>
+            </Link>
+            
+              <li>
+                <button onClick={()=>{
+                  localStorage.removeItem("auth")
+                  setAuth(false)
+                  window.location.reload()
+
+                }} className="px-5  md:w-24 h-14 rounded-xl sm:max-h-10 bg-sec">
+                  Logout
+                </button>
+              </li>
+            
+            </>
+            }
           </ul>
         </div>
       </nav>

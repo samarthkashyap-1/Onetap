@@ -1,0 +1,53 @@
+{
+  "profiles": [
+    {
+      "username": "dexter",
+      "avatar": "/src/assets/avatar3.svg",
+      "email": "eamarthkashyap318@gmail.com",
+      "links": [
+        {
+          "platform": "github",
+          "link": "kknk",
+          "id": 1
+        },
+        {
+          "platform": "portfolio",
+          "link": "lkkk",
+          "id": 0
+        }
+      ],
+      "card": 7,
+      "id": 25
+    },
+    {
+      "username": "sam",
+      "avatar": "/src/assets/avatar3.svg",
+      "email": "samarthkashyap318@gmail.com",
+      "links": [
+        {
+          "platform": "x",
+          "link": "jdnjdnd",
+          "id": 0
+        }
+      ],
+      "card": 4,
+      "id": 26
+    }
+  ],
+  "user": [
+    {
+      "name": "Samarth Kashyap",
+      "email": "samarthkashyap318@gmail.com",
+      "password": "qwerty",
+      "Cpassword": "qwerty",
+      "id": 2
+    },
+    {
+      "name": "kjj",
+      "email": "eamarthkashyap318@gmail.com",
+      "password": "wwww",
+      "Cpassword": "wwww",
+      "id": 3
+    }
+  ]
+}

@@ -14,7 +14,7 @@ import cardftemp from "../assets/cardftemp.png";
 import cardgtemp from "../assets/cardgtemp.png";
 
 
-const Templates = () => {
+const Templates = ({auth, setAuth}) => {
   // create an object which have the details of the cards and images and index
 
   const cards = [
@@ -66,7 +66,7 @@ const Templates = () => {
     <div className="min-h-screen px-20 p-10 sm:px-10 -z-10 ">
       <Fade triggerOnce>
         <div>
-          <Navbar />
+          <Navbar auth={auth} setAuth={setAuth}/>
           <div>
             <h1 className="text-5xl text-primary sm:text-3xl mt-28 ">
               Templates :-
