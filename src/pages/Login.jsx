@@ -30,7 +30,7 @@ const Login = () => {
       <Fade triggerOnce>
         <Link to="/">
           <div className="absolute flex justify-center top-5 cursor-pointer">
-            <img src={back} alt="" className="w-8" />
+            <img src={back} alt="" className="w-8"/>
             <p className="my-auto">Back</p>
           </div>
         </Link>

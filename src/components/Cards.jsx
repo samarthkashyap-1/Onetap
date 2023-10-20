@@ -19,8 +19,53 @@ import pac from "../assets/pac.jpg";
 import portfolio from "../assets/portfolio.png"
 import logoblack from "../assets/logoblack.png"
 import cardG from "../assets/cardG.png"
+import { Link } from "react-router-dom";
 
-const CardA = () => {
+const demo = {
+  username: "John",
+  email: "johnsmith@abc",
+  avatar: avatar,
+  links: [
+    {
+      platform: "instagram",
+      url: "https://www.instagram.com",
+    },
+    {
+      platform: "x",
+      url: "https://twitter.com",
+    },
+    {
+      platform: "github",
+      url: "https://github.com",
+    },
+    {
+      platform: "linkedin",
+      url: "https://linkedin.com",
+    },
+    {
+
+
+      platform: "behance",
+      url: "https://behance.com"
+    },
+  ],
+  card: 1,
+};
+
+
+const logos = {
+  x: x,
+  instagram: insta,
+  behance: behance,
+  github: github,
+  linkedin: linkedin,
+  youtube: youtube,
+  pinterest: pinterest,
+  portfolio: portfolio,
+  twitch: twitch,
+};
+const CardA = ({user}) => {
+  console.log(user)
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center flex px-4 relative py-2 bg-white  text-primary   rounded-md text-center font-semibold hover:bg-[#637A88] cursor-pointer hover:text-white transition duration-300">
@@ -33,7 +78,7 @@ const CardA = () => {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center text-lg w-full"
+          className="text-center text-lg w-full capitalize"
         >
           {label}
         </a>
@@ -53,44 +98,34 @@ const CardA = () => {
       <div className=" md:p-4 rounded-lg min-h-screen  font-Dancing w-1/4 md:w-1/2 p-5 flex   sm:w-full  ">
         <div className="flex flex-col  gap-8 md:gap-4 w-full my-auto  backdrop-blur-lg bg-transparent rounded-2xl items-center p-5  shadow-2xl">
           <img
-            src={avatar}
+            src={user ? user.avatar : demo.avatar}
             alt="avatar"
-            className="w-1/3 mt-2 rounded-full border-2 border-white"
+            className="w-1/3 mt-2 rounded-full  sm:w-1/3 md:w-1/3 border-2 border-white"
           />
           <div className="flex text-white flex-col text-center gap-2">
-            <h2 className="text-2xl font-semibold ">John Smith</h2>
-            <a href = "mailto: abc@example.com" className="text-lg">johnsmith@me.com</a>
+            <h2 className="text-2xl font-semibold ">
+              @{user ? user.username : demo.username}
+            </h2>
+            <a href="mailto: abc@example.com" className="text-lg">
+              {user ? user.email : demo.email}
+            </a>
           </div>
 
           <div className="grid gap-4 w-full">
-            <LinkButton
-              label="Instagram"
-              url="https://www.instagram.com/yourusername/"
-              btnlogo={insta}
-            />
-            <LinkButton
-              label="Twitter"
-              url="https://twitter.com/yourusername/"
-              btnlogo={x}
-            />
-            <LinkButton
-              label="Github"
-              url="https://twitter.com/yourusername/"
-              btnlogo={github}
-            />
-            <LinkButton
-              label="Linkedin"
-              url="https://twitter.com/yourusername/"
-              btnlogo={linkedin}
-            />
-            <LinkButton
-              label="Behance"
-              url="https://twitter.com/yourusername/"
-              btnlogo={behance}
-            />
+            {(user ? user.links : demo.links).map((link) => {
+              return (
+                <LinkButton
+                  label={link.platform}
+                  url={link.url}
+                  btnlogo={logos[link.platform]}
+                />
+              );
+            })}
           </div>
           <div className="mt-auto">
+            <Link to='/'>
             <img src={logowhite} alt="" className="w-20 mx-auto" />
+            </Link>
           </div>
         </div>
       </div>
@@ -98,7 +133,7 @@ const CardA = () => {
   );
 };
 
-const CardB = () => {
+const CardB = ({user}) => {
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center group flex px-4 relative py-2 bg-white  text-primary hover:-translate-y-1   rounded-md text-center font-semibold hover:bg-[#7C828A] cursor-pointer hover:text-white transition duration-300">
@@ -111,7 +146,7 @@ const CardB = () => {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center w-full"
+          className="text-center w-full capitalize"
         >
           {label}
         </a>
@@ -139,52 +174,43 @@ const CardB = () => {
           }}
         >
           <img
-            src={avatar}
+            src={user ? user.avatar : demo.avatar}
             alt="avatar"
-            className="w-1/3 mt-2 rounded-full border-2 border-[#7C828A]"
+            className="w-1/3 mt-2 sm:w-1/3 md:w-1/4 rounded-full border-2 border-[#7C828A]"
           />
           <div className="flex  flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">John Smith</h2>
-            <a href = "mailto: abc@example.com" className="text-lg">johnsmith@me.com</a>
+            <h2 className="text-xl font-semibold ">
+              @{user ? user.username : demo.username}
+            </h2>
+            <a href="mailto: abc@example.com" className="text-lg">
+              {user ? user.email : demo.email}
+            </a>
           </div>
 
           <div className="grid gap-4 w-full">
-            <LinkButton
-              label="Instagram"
-              url="https://www.instagram.com/yourusername/"
-              btnlogo={insta}
-            />
-            <LinkButton
-              label="Twitter"
-              url="https://twitter.com/yourusername/"
-              btnlogo={x}
-            />
-            <LinkButton
-              label="Github"
-              url="https://twitter.com/yourusername/"
-              btnlogo={github}
-            />
-            <LinkButton
-              label="Linkedin"
-              url="https://twitter.com/yourusername/"
-              btnlogo={linkedin}
-            />
-            <LinkButton
-              label="Behance"
-              url="https://twitter.com/yourusername/"
-              btnlogo={behance}
-            />
+            {(user ? user.links : demo.links).map((link) => {
+              return (
+                <LinkButton
+                  label={link.platform}
+                  url={link.url}
+                  btnlogo={logos[link.platform]}
+                />
+              );
+            })}
           </div>
+          <Link to="/">
+
           <div className="mt-auto">
             <img src={logoblack} alt="" className="w-20 mx-auto " />
           </div>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-const CardC = () => {
+const CardC = ({ user }) => {
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center flex px-4 relative py-2 bg-white  text-primary   rounded-md text-center font-semibold hover:bg-[#C1C1C1] cursor-pointer hover:text-white transition duration-300">
@@ -197,7 +223,7 @@ const CardC = () => {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center w-full"
+          className="text-center w-full capitalize"
         >
           {label}
         </a>
@@ -225,52 +251,43 @@ const CardC = () => {
           }}
         >
           <img
-            src={avatar}
+            src={user ? user.avatar : demo.avatar}
             alt="avatar"
-            className="w-1/3 mt-2 rounded-full border-2 border-white"
+            className="w-1/3 mt-2 sm:w-1/3 md:w-1/4 rounded-full border-2 border-white"
           />
           <div className="flex text-white flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">John Smith</h2>
-            <a href = "mailto: abc@example.com" className="text-lg">johnsmith@me.com</a>
+            <h2 className="text-xl font-semibold ">
+              @{user ? user.username : demo.username}
+            </h2>
+            <a href="mailto: abc@example.com" className="text-lg">
+              {user ? user.email : demo.email}
+            </a>
           </div>
 
           <div className="grid gap-4 w-full">
-            <LinkButton
-              label="Instagram"
-              url="https://www.instagram.com/yourusername/"
-              btnlogo={insta}
-            />
-            <LinkButton
-              label="Twitter"
-              url="https://twitter.com/yourusername/"
-              btnlogo={x}
-            />
-            <LinkButton
-              label="Github"
-              url="https://twitter.com/yourusername/"
-              btnlogo={github}
-            />
-            <LinkButton
-              label="Linkedin"
-              url="https://twitter.com/yourusername/"
-              btnlogo={linkedin}
-            />
-            <LinkButton
-              label="Behance"
-              url="https://twitter.com/yourusername/"
-              btnlogo={behance}
-            />
+            {(user ? user.links : demo.links).map((link) => {
+              return (
+                <LinkButton
+                  label={link.platform}
+                  url={link.url}
+                  btnlogo={logos[link.platform]}
+                />
+              );
+            })}
           </div>
+          <Link to="/">
+
           <div className="mt-auto">
             <img src={logowhite} alt="" className="w-20 mx-auto " />
           </div>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-const CardD = () => {
+const CardD = ({ user }) => {
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center group flex px-4 relative py-2 bg-white hover:-translate-y-1  text-primary   rounded-md text-center font-semibold hover:bg-[#663C92] cursor-pointer hover:text-white transition duration-300">
@@ -283,7 +300,7 @@ const CardD = () => {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center w-full"
+          className="text-center w-full capitalize"
         >
           {label}
         </a>
@@ -311,52 +328,43 @@ const CardD = () => {
           }}
         >
           <img
-            src={avatar}
+            src={user ? user.avatar : demo.avatar}
             alt="avatar"
-            className="w-1/3 mt-2 rounded-full border-2 border-[#663C92]"
+            className="w-1/3 mt-2 md:w-1/4 sm:w-1/3 rounded-full border-2 border-[#663C92]"
           />
           <div className="flex text-white flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">John Smith</h2>
-            <a href = "mailto: abc@example.com" className="text-lg">johnsmith@me.com</a>
+            <h2 className="text-xl font-semibold ">
+              @{user ? user.username : demo.username}
+            </h2>
+            <a href="mailto: abc@example.com" className="text-lg">
+              {user ? user.email : demo.email}
+            </a>
           </div>
 
           <div className="grid gap-4 w-full">
-            <LinkButton
-              label="Instagram"
-              url="https://www.instagram.com/yourusername/"
-              btnlogo={insta}
-            />
-            <LinkButton
-              label="Twitter"
-              url="https://twitter.com/yourusername/"
-              btnlogo={x}
-            />
-            <LinkButton
-              label="Github"
-              url="https://twitter.com/yourusername/"
-              btnlogo={github}
-            />
-            <LinkButton
-              label="Linkedin"
-              url="https://twitter.com/yourusername/"
-              btnlogo={linkedin}
-            />
-            <LinkButton
-              label="Behance"
-              url="https://twitter.com/yourusername/"
-              btnlogo={behance}
-            />
+            {(user ? user.links : demo.links).map((link) => {
+              return (
+                <LinkButton
+                  label={link.platform}
+                  url={link.url}
+                  btnlogo={logos[link.platform]}
+                />
+              );
+            })}
           </div>
+          <Link to="/">
+
           <div className="mt-auto">
             <img src={logowhite} alt="" className="w-20 mx-auto " />
           </div>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-const CardE = () => {
+const CardE = ({ user }) => {
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center flex px-4 relative py-2 bg-white  text-primary   rounded-md text-center font-semibold hover:bg-[#0AFFFF] cursor-pointer transition duration-300 hover:motion-safe:animate-bounce ">
@@ -369,7 +377,7 @@ const CardE = () => {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center w-full"
+          className="text-center w-full capitalize"
         >
           {label}
         </a>
@@ -397,52 +405,43 @@ const CardE = () => {
           }}
         >
           <img
-            src={avatar}
+            src={user ? user.avatar : demo.avatar}
             alt="avatar"
-            className="w-1/3 mt-2 rounded-full border-2 border-[#0AFFFF]"
+            className="w-1/3 mt-2  md:w-1/4 sm:w-1/3 rounded-full border-2 border-[#0AFFFF]"
           />
           <div className="flex text-white flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">John Smith</h2>
-            <a href = "mailto: abc@example.com" className="text-lg">johnsmith@me.com</a>
+            <h2 className="text-xl font-semibold ">
+              @{user ? user.username : demo.username}
+            </h2>
+            <a href="mailto: abc@example.com" className="text-lg">
+              {user ? user.email : demo.email}
+            </a>
           </div>
 
           <div className="grid gap-4 w-full">
-            <LinkButton
-              label="Instagram"
-              url="https://www.instagram.com/yourusername/"
-              btnlogo={insta}
-            />
-            <LinkButton
-              label="Twitter"
-              url="https://twitter.com/yourusername/"
-              btnlogo={x}
-            />
-            <LinkButton
-              label="Github"
-              url="https://twitter.com/yourusername/"
-              btnlogo={github}
-            />
-            <LinkButton
-              label="Linkedin"
-              url="https://twitter.com/yourusername/"
-              btnlogo={linkedin}
-            />
-            <LinkButton
-              label="Behance"
-              url="https://twitter.com/yourusername/"
-              btnlogo={behance}
-            />
+            {(user ? user.links : demo.links).map((link) => {
+              return (
+                <LinkButton
+                  label={link.platform}
+                  url={link.url}
+                  btnlogo={logos[link.platform]}
+                />
+              );
+            })}
           </div>
+          <Link to="/">
+
           <div className="mt-auto">
             <img src={logowhite} alt="" className="w-20 mx-auto " />
           </div>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-const CardF = () => {
+const CardF = ({ user }) => {
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center flex px-4 relative py-2 bg-[#BBFFE4] rounded-2xl text-primary    text-center font-semibold  cursor-pointer transition duration-300 hover:-translate-y-1 my-auto border border-black shadow-[5px_5px_0px_0px_rgba(33,37,41,1)] ">
@@ -455,7 +454,7 @@ const CardF = () => {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center w-full"
+          className="text-center w-full capitalize"
         >
           {label}
         </a>
@@ -464,57 +463,45 @@ const CardF = () => {
   };
   return (
     <div className=" h-full flex w-full flex-col justify-center font-paci bg-[#D7FDD7] items-center ">
-      <div
-        className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex  bg-[#D7FDD7]  sm:w-full  "
-        
-      >
+      <div className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex  bg-[#D7FDD7]  sm:w-full  ">
         <div className="flex flex-col gap-8 md:gap-4 w-full my-auto rounded-2xl items-center p-5 shadow-2xl shadow-[#64a164] ">
           <img
-            src={avatar}
+            src={user ? user.avatar : demo.avatar}
             alt="avatar"
-            className="w-1/3 mt-2 rounded-full border-2 border-black shadow-xl"
+            className="w-1/3 mt-2 sm:w-1/3 md:w-1/4 rounded-full border-2 border-black shadow-xl"
           />
           <div className="flex  flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">John Smith</h2>
-            <a href = "mailto: abc@example.com" className="text-lg">johnsmith@me.com</a>
+            <h2 className="text-xl font-semibold ">
+              @{user ? user.username : demo.username}
+            </h2>
+            <a href="mailto: abc@example.com" className="text-lg">
+              {user ? user.email : demo.email}
+            </a>
           </div>
 
           <div className="grid gap-4 w-full">
-            <LinkButton
-              label="Instagram"
-              url="https://www.instagram.com/yourusername/"
-              btnlogo={insta}
-            />
-            <LinkButton
-              label="Twitter"
-              url="https://twitter.com/yourusername/"
-              btnlogo={x}
-            />
-            <LinkButton
-              label="Github"
-              url="https://twitter.com/yourusername/"
-              btnlogo={github}
-            />
-            <LinkButton
-              label="Linkedin"
-              url="https://twitter.com/yourusername/"
-              btnlogo={linkedin}
-            />
-            <LinkButton
-              label="Behance"
-              url="https://twitter.com/yourusername/"
-              btnlogo={behance}
-            />
+            {(user ? user.links : demo.links).map((link) => {
+              return (
+                <LinkButton
+                  label={link.platform}
+                  url={link.url}
+                  btnlogo={logos[link.platform]}
+                />
+              );
+            })}
           </div>
+          <Link to="/">
+
           <div className="mt-auto">
             <img src={logoblack} alt="" className="w-20 mx-auto " />
           </div>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
-const CardG = () => {
+const CardG = ({ user }) => {
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center flex px-4 relative py-2 bg-white text-primary  text-center font-semibold  cursor-pointer transition duration-300 hover:-translate-y-1 my-auto border border-black shadow-[6px_6px_0px_0px_rgba(43,42,37,1)] ">
@@ -527,7 +514,7 @@ const CardG = () => {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center w-full"
+          className="text-center w-full capitalize"
         >
           {label}
         </a>
@@ -539,44 +526,35 @@ const CardG = () => {
       <div className="md:p-4 rounded-lg min-h-screen w-1/4 md:w-1/2 p-5 flex     sm:w-full  ">
         <div className="flex flex-col gap-8 md:gap-4 w-full my-auto rounded-2xl bg-[#F2EADE] items-center p-5 shadow-2xl shadow-black border border-black ">
           <img
-            src={avatar}
+            src={user ? user.avatar : demo.avatar}
             alt="avatar"
-            className="w-1/3 mt-2 rounded-full border-2 border-[rgba(43,42,37,1)] shadow-xl"
+            className="w-1/3 mt-2 md:w-1/4 sm:w-1/3 rounded-full border-2 border-[rgba(43,42,37,1)] shadow-xl"
           />
           <div className="flex text-[rgba(43,42,37,1)] flex-col text-center gap-2 w-full">
-            <h2 className="text-xl font-semibold ">John Smith</h2>
-            <a href = "mailto: abc@example.com" className="text-lg">johnsmith@me.com</a>
+            <h2 className="text-xl font-semibold ">
+              @{user ? user.username : demo.username}
+            </h2>
+            <a href="mailto: abc@example.com" className="text-lg">
+              {user ? user.email : demo.email}
+            </a>
           </div>
 
           <div className="grid gap-4 w-full bg-white p-2 border border-black shadow-[6px_6px_0px_0px_rgba(43,42,37,1)]">
-            <LinkButton
-              label="Instagram"
-              url="https://www.instagram.com/yourusername/"
-              btnlogo={insta}
-            />
-            <LinkButton
-              label="Twitter"
-              url="https://twitter.com/yourusername/"
-              btnlogo={x}
-            />
-            <LinkButton
-              label="Github"
-              url="https://twitter.com/yourusername/"
-              btnlogo={github}
-            />
-            <LinkButton
-              label="Linkedin"
-              url="https://twitter.com/yourusername/"
-              btnlogo={linkedin}
-            />
-            <LinkButton
-              label="Behance"
-              url="https://twitter.com/yourusername/"
-              btnlogo={behance}
-            />
+            {(user ? user.links : demo.links).map((link) => {
+              return (
+                <LinkButton
+                  label={link.platform}
+                  url={link.url}
+                  btnlogo={logos[link.platform]}
+                />
+              );
+            })}
+            <Link to="/">
+
             <div className="mt-auto">
               <img src={logoblack} alt="" className="w-20 mx-auto " />
             </div>
+            </Link>
           </div>
         </div>
       </div>

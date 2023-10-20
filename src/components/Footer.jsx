@@ -4,7 +4,7 @@ import wave2 from "../assets/wave2.svg";
 const Footer = () => {
   return (
     <footer
-      className="absolute right-0 left-0  bg-center bg-cover bg-no-repeat"
+      className="absolute right-0 left-0 bg-center bg-cover bg-no-repeat"
       style={{
         backgroundImage: `url(${wave2})`,
         backgroundSize: "cover",

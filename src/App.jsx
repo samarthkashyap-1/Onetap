@@ -21,8 +21,15 @@ import Signup from "./pages/Signup";
 import Templates from "./pages/Templates";
 import Footer from "./components/Footer";
 import Template from "./pages/Template";
+import Admin from "./pages/Admin";
+import Display from "./pages/Display";
+import Error from "./pages/Error";
 
 function App() {
+const [Profiles, setProfiles] = useState([]);
+// const Profile = JSON.parse(localStorage.getItem("profile"));
+
+
    const cards = [
      {
        id: 1,
@@ -78,6 +85,13 @@ function App() {
     );
   }
 
+  useEffect(() => {
+    
+    setProfiles(prev=>JSON.parse(localStorage.getItem("profiles")));
+    console.log(Profiles);
+  }
+  , [localStorage])
+
   return (
     <div className="min-h-screen">
       {/* <h1 className="hidden sm:block md:block text-5xl text-center mt-96">
@@ -85,12 +99,18 @@ function App() {
       </h1> */}
 
       <Routes>
+        {Profiles.map((profile) => (
+          <Route
+            key={profile.index}
+            path={`${profile.username}`}
+            element={<Display Profile={profile} />}
+          />
+        ))}
         <Route
           path="/"
           element={
             <>
               <Landing />
-              
               <Footer /> {/* Include the footer here for non-template routes */}
             </>
           }
@@ -100,13 +120,13 @@ function App() {
           element={
             <>
               <Templates />
-              
               <Footer /> {/* Include the footer here for non-template routes */}
             </>
           }
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/admin" element={<Admin />} />
         {cards.map((card) => (
           <Route
             key={card.id}
@@ -114,6 +134,8 @@ function App() {
             element={<Template Card={card.card} />}
           />
         ))}
+
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

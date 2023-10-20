@@ -76,16 +76,16 @@ const Templates = () => {
             {cards.map((card) => {
               return (
                 <Fade triggerOnce>
-                  <div className="flex flex-col justify-center items-center border p-2 rounded-lg ">
                     <Link to={`/templates/${card.id}`}>
+                  <div className="flex flex-col justify-center group  items-center border p-2 rounded-lg ">
                       <img
                         src={card.image}
                         alt=""
-                        className="w-52 rounded-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                        className="w-52 rounded-xl group-hover:shadow-2xl group-hover:-translate-y-1 transition-all duration-300"
                       />
-                    </Link>
                     <h1 className="text-2xl mt-4">{card.name}</h1>
                   </div>
+                    </Link>
                 </Fade>
               );
             })}
