@@ -8,7 +8,7 @@ import pacman from "../assets/pacman.jpg";
 import logo from "../assets/logo.png";
 import logowhite from "../assets/logo white.png";
 import x from "../assets/x.png";
-import insta from "../assets/insta.svg";
+import instagram from "../assets/insta.svg";
 import behance from "../assets/behance.svg";
 import github from "../assets/git.svg";
 import linkedin from "../assets/link.svg";
@@ -31,23 +31,23 @@ const demo = {
   links: [
     {
       platform: "instagram",
-      url: "https://www.instagram.com",
+      link: "samarthkashyap-1",
     },
     {
       platform: "x",
-      url: "https://twitter.com",
+      link: "https://twitter.com",
     },
     {
       platform: "github",
-      url: "https://github.com",
+      link: "https://github.com",
     },
     {
       platform: "linkedin",
-      url: "https://linkedin.com",
+      link: "https://linkedin.com",
     },
     {
       platform: "behance",
-      url: "https://behance.com",
+      link: "https://behance.com",
     },
   ],
   card: 1,
@@ -59,17 +59,30 @@ const notify = () =>
     closeOnClick: true,
   });
 
+// const logos = {
+//   x: x,
+//   instagram: {instagram:instagram,url:"https://www.instagram.com"},
+//   behance: behance,
+//   github: github,
+//   linkedin: linkedin,
+//   youtube: youtube,
+//   pinterest: pinterest,
+//   portfolio: portfolio,
+//   twitch: twitch,
+// };
+
 const logos = {
-  x: x,
-  instagram: insta,
-  behance: behance,
-  github: github,
-  linkedin: linkedin,
-  youtube: youtube,
-  pinterest: pinterest,
-  portfolio: portfolio,
-  twitch: twitch,
+  x: { name: x, url: "https://www.twitter.com/" },
+  instagram: { name: instagram, url: "https://www.instagram.com/" },
+  behance: { name: behance, url: "https://www.behance.net/" },
+  github: { name: github, url: "https://www.github.com/" },
+  linkedin: { name: linkedin, url: "https://www.linkedin.com/" },
+  youtube: { name: youtube, url: "https://www.youtube.com/" },
+  pinterest: { name: pinterest, url: "https://www.pinterest.com/" },
+  portfolio: { name: portfolio, url: "https://yourportfolio.com/" },
+  twitch: { name: twitch, url: "https://www.twitch.tv/" },
 };
+
 const CardA = ({ user }) => {
   console.log(user);
   const LinkButton = ({ label, url, btnlogo }) => {
@@ -130,11 +143,12 @@ const CardA = ({ user }) => {
 
           <div className="grid gap-4 w-full">
             {(user ? user.links : demo.links).map((link) => {
+              console.log(logos.x.name)
               return (
                 <LinkButton
                   label={link.platform}
-                  url={link.url}
-                  btnlogo={logos[link.platform]}
+                  url={logos[link.platform].url+link.link}
+                  btnlogo={logos[link.platform].name}
                 />
               );
             })}
@@ -217,8 +231,8 @@ const CardB = ({ user }) => {
               return (
                 <LinkButton
                   label={link.platform}
-                  url={link.url}
-                  btnlogo={logos[link.platform]}
+                  url={logos[link.platform].url+link.link}
+                  btnlogo={logos[link.platform].name}
                 />
               );
             })}
@@ -301,8 +315,8 @@ const CardC = ({ user }) => {
               return (
                 <LinkButton
                   label={link.platform}
-                  url={link.url}
-                  btnlogo={logos[link.platform]}
+                  url={logos[link.platform].url+link.link}
+                  btnlogo={logos[link.platform].name}
                 />
               );
             })}
@@ -385,8 +399,8 @@ const CardD = ({ user }) => {
               return (
                 <LinkButton
                   label={link.platform}
-                  url={link.url}
-                  btnlogo={logos[link.platform]}
+                  url={logos[link.platform].url+link.link}
+                  btnlogo={logos[link.platform].name}
                 />
               );
             })}
@@ -469,8 +483,8 @@ const CardE = ({ user }) => {
               return (
                 <LinkButton
                   label={link.platform}
-                  url={link.url}
-                  btnlogo={logos[link.platform]}
+                  url={logos[link.platform].url+link.link}
+                  btnlogo={logos[link.platform].name}
                 />
               );
             })}
@@ -537,8 +551,8 @@ const CardF = ({ user }) => {
               return (
                 <LinkButton
                   label={link.platform}
-                  url={link.url}
-                  btnlogo={logos[link.platform]}
+                  url={logos[link.platform].url+link.link}
+                  btnlogo={logos[link.platform].name}
                 />
               );
             })}
@@ -604,8 +618,8 @@ const CardG = ({ user }) => {
               return (
                 <LinkButton
                   label={link.platform}
-                  url={link.url}
-                  btnlogo={logos[link.platform]}
+                  url={logos[link.platform].url+link.link}
+                  btnlogo={logos[link.platform].name}
                 />
               );
             })}

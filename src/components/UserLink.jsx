@@ -58,7 +58,7 @@ const UserLink = ({ setData }) => {
           type="text"
           name=""
           id=""
-          placeholder="Enter Link"
+          placeholder="Enter Username"
           className=" block p-2 border rounded-md w-full outline-sec shadow-lg"
           {...Link("link", {
             required: "link is required",
