@@ -20,7 +20,7 @@ import Error from "./pages/Error";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "./pages/Context";
-import Newadmin from "./pages/Newadmin";
+
 
 
 function App() {
