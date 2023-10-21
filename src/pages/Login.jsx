@@ -33,7 +33,10 @@ const Login = () => {
        };
 
        const loginuser = async (data) => {
-        const res = await axios.post("http://localhost:3001/login", data);
+        const res = await axios.post(
+          `${import.meta.env.VITE_REACT_APP_URL}/login`,
+          data
+        );
         const user = res.data;
         console.log(user);
         

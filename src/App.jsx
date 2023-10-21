@@ -41,7 +41,9 @@ function App() {
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     const storedProfiles = async () => {
-      const res = await axios.get("http://localhost:3001/profiles");
+      const res = await axios.get(
+        `${import.meta.env.VITE_REACT_APP_URL}/profiles`
+      );
       const data = res.data;
       setProfiles(data);
     };

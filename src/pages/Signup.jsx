@@ -32,7 +32,10 @@ const Signup = () => {
   };
 
   const postuser = async (data) => {
-    const res = await axios.post("http://localhost:3001/user", data);
+    const res = await axios.post(
+      `${import.meta.env.VITE_REACT_APP_URL}/user`,
+      data
+    );
     const user = res.data;
     toast.success("Signed up Successfully");
     navigate("/login");
@@ -87,7 +90,9 @@ const Signup = () => {
                     message: "Email is not valid.",
                   },
                   validate: async (value) => {
-                    const res = await axios.get("http://localhost:3001/user");
+                    const res = await axios.get(
+                      `${import.meta.env.VITE_REACT_APP_URL}/user`
+                    );
                     const user = res.data;
                     const log = user.filter((item) => {
                       return item.email == value;

@@ -157,7 +157,7 @@ const Admin = ({ allprofile }) => {
     try {
       setLoading(true);
       const res = await axios.patch(
-        `http://localhost:3001/profiles/${existuser.id}`,
+        `${import.meta.env.VITE_REACT_APP_URL}/profiles/${existuser.id}`,
         profile
       );
       const data = res.data;
@@ -188,7 +188,10 @@ const Admin = ({ allprofile }) => {
   const postdata = async (profile) => {
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:3001/profiles", profile);
+      const res = await axios.post(
+        `${import.meta.env.VITE_REACT_APP_URL}/profiles`,
+        profile
+      );
       const data = res.data;
       setLoading(false);
       toast.success("Profile Updated Successfully");
