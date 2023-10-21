@@ -179,7 +179,7 @@ const Admin = ({ allprofile }) => {
     if (finduser) {
       setexistuser(finduser);
       setUsername((prev) => finduser.username);
-      setSelectedAvatar((prev) => finduser.avatar);
+      
       setData((prev) => finduser.links);
       console.log(finduser);
     }

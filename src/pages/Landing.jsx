@@ -27,6 +27,9 @@ const Landing = ({ auth, setAuth }) => {
     reset();
   };
   console.log(auth);
+  // useEffect(() => {
+  //  window.location.reload();
+  // }, [localStorage]);
   return (
     <div className="">
       <Toast/>
@@ -55,7 +58,7 @@ const Landing = ({ auth, setAuth }) => {
                   Where Streamlining and Simplifying are Just One Tap Away!{" "}
                 </h1>
                 <div className="mt-12">
-                  <Link to={`${!auth?"/login":"/admin"}`}>
+                  <Link to={`${!localStorage.getItem("auth")?"/login":"/admin"}`}>
                     <button className="w-fit shadow-xl px-5  h-14 rounded-xl sm:max-h-10 bg-primary text-sec ">
                       Claim Your Link
                     </button>
