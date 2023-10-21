@@ -96,7 +96,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/" element={<Admin allprofile={profiles} />} />
-        {/* <Route path="/admin/:username" element={<Newadmin allprofile={profiles} />} /> */}
+       
         <Route path="/templates/:id" element={<Template />} />
         <Route path="*" element={<Error />} />
       </Routes>
