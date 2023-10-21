@@ -8,7 +8,13 @@ import { Fade } from "react-awesome-reveal";
 import axios from "axios";
 import Toast from "./Toast";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+
+
+
 const Signup = () => {
+  const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
  
@@ -79,6 +85,16 @@ const Signup = () => {
                   pattern: {
                     value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
                     message: "Email is not valid.",
+                  },
+                  validate: async (value) => {
+                    const res = await axios.get("http://localhost:3001/user");
+                    const user = res.data;
+                    const log = user.filter((item) => {
+                      return item.email == value;
+                    });
+                    if (log.length != 0) {
+                      return "Email is already registered";
+                    }
                   },
                 })}
               />

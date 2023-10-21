@@ -17,7 +17,7 @@ const [authcheck, setauthcheck] = useState(false)
    };
 
    window.addEventListener("scroll", handleScroll);
-   return () => window.removeEventListener("scroll", handleScroll);
+  //  return () => window.removeEventListener("scroll", handleScroll);
  }, [prevScrollPos]);
 
   useEffect(() => {

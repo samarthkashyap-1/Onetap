@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import avatar1 from "../assets/avatar1.svg";
 import avatar2 from "../assets/avatar2.svg";
 import avatar3 from "../assets/avatar3.svg";
@@ -9,31 +9,30 @@ import avatar6 from "../assets/avatar6.svg";
 
 
 
-const AvatarSelector = ({ onAvatarSelect }) => {
+const AvatarSelector = ({ onAvatarSelect}) => {
   const [selectedAvatar, setSelectedAvatar] = useState("");
-  const avatars = [
-    avatar1,
-    avatar2,
-    avatar3,
-    avatar4,
-    avatar5,
-    avatar6,
-  ];
+  const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6];
+  
+ 
 
   const handleAvatarClick = (avatar) => {
+    
+
     setSelectedAvatar(avatar);
     onAvatarSelect(avatar); // Callback to notify the parent component
   };
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4 text-center">Select Your Avatar</h2>
+      <h2 className="text-xl font-semibold mb-4 text-center">
+        Select Your Avatar
+      </h2>
       <div className="flex flex-wrap justify-center -m-2">
         {avatars.map((avatar, index) => (
           <div
             key={index}
-            className={`m-2 cursor-pointer  rounded-full p-1 transition-all duration-200 ${
-              selectedAvatar === avatar ? "border border-sec scale-110" : ""
+            className={`m-2 cursor-pointer  rounded-full p-1  ${
+              selectedAvatar === avatar ? "outline outline-sec" : ""
             }`}
             onClick={() => handleAvatarClick(avatar)}
           >

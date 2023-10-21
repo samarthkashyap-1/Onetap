@@ -33,14 +33,11 @@ const Login = () => {
        };
 
        const loginuser = async (data) => {
-        const res = await axios.get("http://localhost:3001/user");
+        const res = await axios.post("http://localhost:3001/login", data);
         const user = res.data;
-       
-        const log = user.filter((item) => {
-          return item.email == data.email && item.password == data.password;
-        });
+        console.log(user);
         
-        if (log.length == 0) {
+        if (!user) {
          return toast.error("Invalid Credentials");
         } else {
           // Inside a component or event handler

@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-
+import shortid from "shortid";
 const UserLink = ({ setData }) => {
-    const [ind, setind] = useState(0)
+    
     
   const {
     register: Link,
@@ -15,7 +15,7 @@ const UserLink = ({ setData }) => {
 
   const onSubmit = (data) => {
     
-    data.id = ind;
+    data.id = shortid.generate();
     setData(prev => [...prev, {...data}]);
     reset();
     setind(prev => prev + 1)
