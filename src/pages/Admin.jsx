@@ -156,7 +156,7 @@ const Admin = ({ allprofile }) => {
   const patchdata = async (profile) => {
     try {
       setLoading(true);
-      const res = await axios.patch(
+      const res = await axios.put(
         `${import.meta.env.VITE_REACT_APP_URL}/profiles/${existuser.id}`,
         profile
       );
@@ -241,8 +241,10 @@ const Admin = ({ allprofile }) => {
         className={`h-screen bg-black bg-opacity-50 z-50 absolute left-0 right-0 top-0 flex flex-col justify-center items-center
          ${loading ? "" : "hidden"}`}
       >
-        <Lottie animationData={loader} className="w-28" />
-        <p className="text-white text-sm">Please Hold...</p>
+        <Lottie animationData={loader} className="w-28 sm:w-16" />
+        <p className="text-white text-sm animate-bounce">
+          Getting your links ready..
+        </p>
       </div>
       <div
         className={`sm:pt-16 h-screen flex flex-col pt-5 ${
@@ -268,7 +270,9 @@ const Admin = ({ allprofile }) => {
           {currentStep === 1 && (
             <div className=" w-1/2 mx-auto sm:w-full items-center justify-center">
               <div className=" p-8 rounded ">
-                <h1 className="text-4xl font-semibold mb-4 sm:text-2xl">Hey there!!!</h1>
+                <h1 className="text-4xl font-semibold mb-4 sm:text-2xl">
+                  Hey there!!!
+                </h1>
                 <div className="">
                   <label htmlFor="" className="text-sm">
                     Username
@@ -393,7 +397,7 @@ const Admin = ({ allprofile }) => {
           </>
         )}
 
-        <div className="flex mt-auto  mx-auto sm:flex-col sm:gap-5 sm:p-10 w-1/2 justify-between py-10 px-20">
+        <div className="flex mt-auto mx-auto sm:flex-col items-center sm:gap-5  w-1/2 justify-between py-10 px-10">
           {currentStep > 1 && (
             <button
               className="bg-primary px-5 py-3 text-white rounded-lg"
@@ -402,9 +406,24 @@ const Admin = ({ allprofile }) => {
               Prev
             </button>
           )}
-          {currentStep <= 2 && (
+          {currentStep === 1 && (
             <button
-              className={`bg-primary px-5 py-3  text-white rounded-lg ${
+              className={`bg-primary px-5 py-3 text-white rounded-lg ${
+                username === "" || selectedAvatar === "" || !unique
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              }
+
+            `}
+              onClick={handleNext}
+              disabled={username === "" || selectedAvatar === "" || !unique}
+            >
+              Next
+            </button>
+          )}
+          {currentStep === 2 && (
+            <button
+              className={`bg-primary px-5 py-3 text-white rounded-lg ${
                 username === "" ||
                 selectedAvatar === "" ||
                 data.length < 3 ||
@@ -413,16 +432,21 @@ const Admin = ({ allprofile }) => {
                   : ""
               }
 
-            ${currentStep <= 1 ? "ml-auto" : ""}`}
+            `}
               onClick={handleNext}
-              disabled={username === "" || selectedAvatar === "" || !unique}
+              disabled={
+                username === "" ||
+                selectedAvatar === "" ||
+                !unique ||
+                data.length < 3
+              }
             >
               Next
             </button>
           )}
           {currentStep === 3 && (
             <button
-              className="bg-primary px-5 py-3  text-white rounded-lg"
+              className="bg-primary px-5 py-3 text-white rounded-lg"
               onClick={completeprofile}
             >
               Submit

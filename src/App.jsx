@@ -64,7 +64,7 @@ function App() {
   if (!load) {
     return (
       <div className="h-screen flex justify-center items-center">
-        <img src={logo} alt="" className="w-96 animate-pulse" />
+        <img src={logo} alt="" className="w-96 sm:w-52 animate-pulse" />
       </div>
     );
   }

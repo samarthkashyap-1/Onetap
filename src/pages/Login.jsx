@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import { useForm } from "react-hook-form";
 import showpass from "../assets/showpass.png";
@@ -6,72 +6,91 @@ import { Link } from "react-router-dom";
 import back from "../assets/back.png";
 import { Fade } from "react-awesome-reveal";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import Toast from './Toast';
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Toast from "./Toast";
 
 const Login = () => {
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    const navigate = useNavigate();
-  
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigate = useNavigate();
 
-    const togglePasswordVisibility = () => {
-      setPasswordVisible(!passwordVisible);
-    };
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
-    
+  const {
+    register: Logindetail,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-       const {
-         register: Logindetail,
-         handleSubmit,reset,
-         formState: { errors },
-       } = useForm();
+  const onSubmit = (data) => {
+    //  console.log(data);
+    loginuser(data);
+  };
 
-       const onSubmit = (data) => {
-         console.log(data);
-         loginuser(data);
-       };
+  const loginuser = async (data) => {
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_REACT_APP_URL}/login`,
+        data
+      );
+      console.log(res)
+      const user = res.data;
 
-       const loginuser = async (data) => {
-        const res = await axios.post(
-          `${import.meta.env.VITE_REACT_APP_URL}/login`,
-          data
-        );
-        const user = res.data;
-        console.log(user);
-        
-        if (!user) {
-         return toast.error("Invalid Credentials");
-        } else {
-          // Inside a component or event handler
-          toast.success("Logged in Successfully");
-        }
+      if (!user || user === "Email is not registered") {
+       return toast.error("Invalid Credentials");
+      } else {
+        toast.success("Logged in Successfully");
         const token = {
           auth: true,
           email: data.email,
-          
-        }
+        };
         localStorage.setItem("auth", JSON.stringify(token));
         reset();
         setTimeout(() => {
           navigate("/");
         }, 1000);
-       
       }
-
-      useEffect(() => {
-        const auth = localStorage.getItem("auth");
-        if (auth) {
-          navigate("/");
+    } 
+       catch (error) {
+      if (error.response) {
+        if (error.response.status === 404) {
+          // Handle the case when the email is not registered
+          console.log('Email is not registered:', error.response.data);
+          toast.error('Email is not registered');
+        } else if (error.response.status === 401) {
+          // Handle the case of invalid email or password
+          console.log('Invalid email or password:', error.response.data);
+          toast.error('Invalid email or password');
+        } else {
+          // Handle other errors
+          console.error('An error occurred:', error);
+          toast.error('An error occurred. Please try again later.');
         }
-      }, []);
+      } else {
+        console.error('An error occurred:', error);
+        // Handle unexpected errors, possibly network-related
+        toast.error('An error occurred. Please try again later.');
+      }
+    }
+  };
+
+
+  useEffect(() => {
+    const auth = localStorage.getItem("auth");
+    if (auth) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div className="flex flex-col gap-10 h-screen px-10">
-      <Toast/>
+      <Toast />
       <Fade triggerOnce>
         <Link to="/">
           <div className="absolute flex justify-center top-5 cursor-pointer">
-            <img src={back} alt="" className="w-8"/>
+            <img src={back} alt="" className="w-8" />
             <p className="my-auto">Back</p>
           </div>
         </Link>
@@ -139,6 +158,6 @@ const Login = () => {
       </Fade>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;

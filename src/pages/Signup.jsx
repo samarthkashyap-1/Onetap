@@ -38,7 +38,8 @@ const Signup = () => {
     );
     const user = res.data;
     toast.success("Signed up Successfully");
-    navigate("/login");
+    localStorage.setItem("auth", JSON.stringify({ auth: true, email: user.email}));
+    navigate("/");
     reset();
     console.log(user);
   }
