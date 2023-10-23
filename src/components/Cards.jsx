@@ -90,7 +90,7 @@ const logos = {
   instagram: { name: instagram, url: "https://www.instagram.com/" },
   behance: { name: behance, url: "https://www.behance.net/" },
   github: { name: github, url: "https://www.github.com/" },
-  linkedin: { name: linkedin, url: "https://www.linkedin.com/" },
+  linkedin: { name: linkedin, url: "https://www.linkedin.com/in/" },
   youtube: { name: youtube, url: "https://www.youtube.com/" },
   pinterest: { name: pinterest, url: "https://www.pinterest.com/" },
   portfolio: { name: portfolio, url: "https://yourportfolio.com/" },
