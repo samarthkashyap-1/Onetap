@@ -1,60 +1,72 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
-import { useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import showpass from "../assets/showpass.png";
-import  back from "../assets/back.png";
+import back from "../assets/back.png";
 import { Fade } from "react-awesome-reveal";
-import axios from "axios";
+
 import Toast from "./Toast";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
-
-
+import { Createuser } from "../services/api";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [disabler, setdisabler] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-
- 
 
   const {
     register: Signupdetail,
-    handleSubmit,reset,watch,
+    handleSubmit,
+    reset,
+    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
     postuser(data);
-    
   };
 
   const postuser = async (data) => {
-    const res = await axios.post(
-      `${import.meta.env.VITE_REACT_APP_URL}/user`,
-      data
-    );
-    const user = res.data;
-    toast.success("Signed up Successfully");
-    localStorage.setItem("auth", JSON.stringify({ auth: true, email: user.email}));
-    navigate("/");
-    reset();
-    console.log(user);
-  }
-  
+    try {
+      //  localStorage.clear();
+      setdisabler(true);
+      const res = await Createuser(data);
+      const user = res.data;
+      localStorage.setItem(
+        "token",
+        JSON.stringify({ token: user.token, email: user.email })
+      );
+      toast.success("Signed up Successfully");
+      reset();
+      setdisabler(false);
+      setTimeout(() => {
+        navigate("/admin");
+      }, 1000);
+
+      console.log(user);
+    } catch (error) {
+      setdisabler(false);
+      if (error.response) {
+        if (error.response.status === 400) {
+          toast.error("Email is already registered");
+        }
+      }
+    }
+  };
+
   useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem("auth"));
+    const auth = JSON.parse(localStorage.getItem("token"));
     if (auth) {
       navigate("/admin");
     }
-  }
-  , []);
+  }, []);
 
   return (
     <div className="flex flex-col gap-10 h-screen px-10">
-      <Toast/>
+      <Toast />
       <Fade triggerOnce>
         <Link to="/">
           <div className="absolute flex justify-center z-10 top-5 cursor-pointer">
@@ -62,7 +74,7 @@ const Signup = () => {
             <p className="my-auto">Back</p>
           </div>
         </Link>
-        <div className="bg-primary w-1/4 mx-auto rounded-xl py-5 mt-5 sm:w-full md:w-1/2">
+        <div className="bg-primary w-1/4 mx-auto rounded-xl py-5 sm:w-full md:w-1/2">
           <img src={logo} alt="" className="h-20 sm:h-16 mx-auto" />
         </div>
         <div>
@@ -90,18 +102,6 @@ const Signup = () => {
                     value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
                     message: "Email is not valid.",
                   },
-                  validate: async (value) => {
-                    const res = await axios.get(
-                      `${import.meta.env.VITE_REACT_APP_URL}/user`
-                    );
-                    const user = res.data;
-                    const log = user.filter((item) => {
-                      return item.email == value;
-                    });
-                    if (log.length != 0) {
-                      return "Email is already registered";
-                    }
-                  },
                 })}
               />
               {errors.email && (
@@ -116,12 +116,13 @@ const Signup = () => {
                     required: "Password is required",
                   })}
                 />
-                <button
-                  className=" scale-50 w-fit"
+
+                <img
+                  src={showpass}
+                  alt=""
+                  className=" scale-50 w-fit cursor-pointer"
                   onClick={() => setPasswordVisible(!passwordVisible)}
-                >
-                  <img src={showpass} alt="" />
-                </button>
+                />
               </div>
               {errors.password && (
                 <p className="text-red-500">{errors.password.message}</p>
@@ -140,22 +141,25 @@ const Signup = () => {
                     },
                   })}
                 />
-                <button
-                  className=" scale-50 w-fit"
+                <img
+                  src={showpass}
+                  alt=""
+                  className=" scale-50 w-fit cursor-pointer"
                   onClick={() => setPasswordVisible(!passwordVisible)}
-                >
-                  <img src={showpass} alt="" />
-                </button>
+                />
               </div>
               {errors.Cpassword && (
                 <p className="text-red-500">{errors.Cpassword.message}</p>
               )}
-              <button className="w-full h-14 sm:h-12 rounded-xl bg-sec text-white">
+              <button
+                disabled={disabler}
+                className="w-full h-14 sm:h-12 rounded-xl bg-sec text-white"
+              >
                 Sign up
               </button>
             </div>
           </form>
-          <div className="flex flex-col gap-3 mt-3">
+          <div className="flex flex-col gap-3 my-3">
             <p className="text-sm text-center sm:text-xs">
               Already have an account?{" "}
               <span>

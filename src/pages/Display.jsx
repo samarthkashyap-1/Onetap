@@ -8,25 +8,19 @@ import {
   CardF,
   CardG,
 } from "../components/Cards";
-import avatar1 from "../assets/avatar1.svg";
-import avatar2 from "../assets/avatar2.svg";
-import avatar3 from "../assets/avatar3.svg";
-import avatar4 from "../assets/avatar4.svg";
-import avatar5 from "../assets/avatar5.svg";
-import avatar6 from "../assets/avatar6.svg";
 import { useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+
 import loader from "../assets/loader.json";
 
 import logo from "../assets/logo.png";
-import axios from "axios";
 import Lottie from "lottie-react";
-import { set } from "react-hook-form";
 
-const Display = ({ Profiles }) => {
+import { getuser } from "../services/api";
+
+const Display = () => {
   const [loading, setLoading] = useState(false);
   const [nouser, setNouser] = useState(false);
-  const location = useLocation();
+ 
   const { username } = useParams();
   const cards = [
     {
@@ -71,7 +65,7 @@ const Display = ({ Profiles }) => {
  
   const [Profile , setProfile] = useState()
 
-  const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6];
+
   const [selectedCard, setSelectedCard] = useState(null);
 
   // Function to find the selected card
@@ -82,9 +76,8 @@ const Display = ({ Profiles }) => {
   const gettingprofile = async () => {
     try {
       setLoading(true);
-      const a = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_URL}/${username}`
-      );
+      const a = await getuser(username)
+      
       const data = a.data;
       setProfile(data);
       if (a !== undefined) {
@@ -92,7 +85,6 @@ const Display = ({ Profiles }) => {
         setSelectedCard(foundCard);
       }
       setLoading(false);
-      console.log(data);
     } catch (error) {
       if(error.response.status === 404){
         setLoading(false);

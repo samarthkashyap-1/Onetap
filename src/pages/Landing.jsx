@@ -1,20 +1,23 @@
-import React from 'react'
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState} from "react";
 import { useForm } from "react-hook-form";
-import logo from "../assets/logo.png";
-import loader from "../assets/loader.json";
+
 import wave from "../assets/wavee.svg";
-import wave2 from "../assets/wave2.svg";
-import {Link } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import blob from "../assets/blob.svg";
 import demo from "../assets/landing.png";
 import { Fade } from "react-awesome-reveal";
-import Footer from '../components/Footer';
-import Toast from './Toast';
+
+import { toast} from "react-toastify";
+
+import Toast from "./Toast";
+import { Contactapi } from "../services/api";
 
 const Landing = ({ auth, setAuth }) => {
+  const [disabler,setdisabler] = useState(false)
   const {
     register,
     handleSubmit,
@@ -22,17 +25,29 @@ const Landing = ({ auth, setAuth }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (data) => {
+
+    try {
+      setdisabler(true)
+      console.log(data);
+      const result = await Contactapi(data)
+        if(result.status===200){
+          toast.success("Message Recieved")
+        }
+        reset();
+      setdisabler(false)
+    } catch (error) {
+      setdisabler(false)
+      toast.error("Something went wrong")
+    }
   };
-  console.log(auth);
-  // useEffect(() => {
-  //  window.location.reload();
-  // }, [localStorage]);
+  // console.log(auth);
+  
+
+
   return (
     <div className="">
-      <Toast/>
+      <Toast />
       <Fade triggerOnce>
         <header
           className=" bg-cover bg-no-repeat "
@@ -58,7 +73,11 @@ const Landing = ({ auth, setAuth }) => {
                   Where Streamlining and Simplifying are Just One Tap Away!{" "}
                 </h1>
                 <div className="mt-12">
-                  <Link to={`${!localStorage.getItem("auth")?"/login":"/admin"}`}>
+                  <Link
+                    to={`${
+                      !localStorage.getItem("token") ? "/login" : "/admin"
+                    }`}
+                  >
                     <button className="w-fit shadow-xl px-5  h-14 rounded-xl sm:max-h-10 bg-primary text-sec ">
                       Claim Your Link
                     </button>
@@ -71,13 +90,14 @@ const Landing = ({ auth, setAuth }) => {
               <img
                 src={blob}
                 alt=""
-                className=" scale-75 mt-10 -z-10 absolute top-0"
+                className=" scale-75 mt-10 -z-10 md:mt-40 absolute top-0"
               />
               <Fade triggerOnce>
                 <img
                   src={demo}
                   loading="lazy"
                   alt=""
+                  id="tilt"
                   className="scale-90 mt-10 z-10"
                 />
               </Fade>
@@ -146,7 +166,10 @@ const Landing = ({ auth, setAuth }) => {
               </div>
 
               <div className="flex justify-end w-1/2 mx-auto">
-                <button className="w-40 h-14 rounded-xl bg-sec text-white">
+                <button
+                  disabled={disabler}
+                  className={`w-40 h-14 rounded-xl bg-sec text-white ${disabler?" cursor-wait":""}`}
+                >
                   Send
                 </button>
               </div>
@@ -158,4 +181,4 @@ const Landing = ({ auth, setAuth }) => {
   );
 };
 
-export default Landing
+export default Landing;

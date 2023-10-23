@@ -18,7 +18,7 @@ const UserLink = ({ setData }) => {
     data.id = shortid.generate();
     setData(prev => [...prev, {...data}]);
     reset();
-    setind(prev => prev + 1)
+    // setind(prev => prev + 1)
   };
   return (
     <form

@@ -84,7 +84,7 @@ const [authcheck, setauthcheck] = useState(false)
         </div>
         <div className="my-auto w-[20%] md:w-full">
           <ul className="flex justify-evenly ">
-            {!authcheck ? <>
+            {!localStorage.getItem("token") ? <>
             <Link to="/login">
               <li>
                 <button className="px-5 sm:px-0  sm:w-20 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
@@ -112,7 +112,7 @@ const [authcheck, setauthcheck] = useState(false)
             
               <li>
                 <button onClick={()=>{
-                  localStorage.removeItem("auth")
+                  localStorage.removeItem("token")
                   setAuth(false)
                   window.location.reload()
 

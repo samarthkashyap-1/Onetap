@@ -23,6 +23,12 @@ import { Link } from "react-router-dom";
 import share from "../assets/share.svg";
   import { ToastContainer, toast } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
+  import avatar1 from "../assets/avatar1.svg";
+  import avatar2 from "../assets/avatar2.svg";
+  import avatar3 from "../assets/avatar3.svg";
+  import avatar4 from "../assets/avatar4.svg";
+  import avatar5 from "../assets/avatar5.svg";
+  import avatar6 from "../assets/avatar6.svg";
 
 const demo = {
   username: "John",
@@ -52,6 +58,14 @@ const demo = {
   ],
   card: 1,
 };
+  const avatars = [
+    { id: 1, avatar: avatar1 },
+    { id: 2, avatar: avatar2 },
+    { id: 3, avatar: avatar3 },
+    { id: 4, avatar: avatar4 },
+    { id: 5, avatar: avatar5 },
+    { id: 6, avatar: avatar6 },
+  ];
 const notify = () =>
   toast.success("Link Copied!", {
     autoClose: 1000,
@@ -128,7 +142,9 @@ const CardA = ({ user }) => {
             }}
           />
           <img
-            src={user ? user.avatar : demo.avatar}
+            src={user ? avatars.find((avatar) =>
+                    (avatar.id == user.avatar)
+                  ).avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 rounded-full  sm:w-1/3 md:w-1/3 border-2 border-white"
           />
@@ -215,7 +231,9 @@ const CardB = ({ user }) => {
             }}
           />
           <img
-            src={user ? user.avatar : demo.avatar}
+            src={user ? avatars.find((avatar) =>
+                    (avatar.id == user.avatar)
+                  ).avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 sm:w-1/3 md:w-1/4 rounded-full border-2 border-[#7C828A]"
           />
@@ -299,7 +317,9 @@ const CardC = ({ user }) => {
             }}
           />
           <img
-            src={user ? user.avatar : demo.avatar}
+            src={user ? avatars.find((avatar) =>
+                    (avatar.id == user.avatar)
+                  ).avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 sm:w-1/3 md:w-1/4 rounded-full border-2 border-white"
           />
@@ -383,7 +403,9 @@ const CardD = ({ user }) => {
             }}
           />
           <img
-            src={user ? user.avatar : demo.avatar}
+            src={user ? avatars.find((avatar) =>
+                    (avatar.id == user.avatar)
+                  ).avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 md:w-1/4 sm:w-1/3 rounded-full border-2 border-[#663C92]"
           />
@@ -417,6 +439,7 @@ const CardD = ({ user }) => {
 };
 
 const CardE = ({ user }) => {
+  // console.log();
   const LinkButton = ({ label, url, btnlogo }) => {
     return (
       <div className="w-full justify-center flex px-4 relative py-2 bg-white  text-primary   rounded-md text-center font-semibold hover:bg-[#0AFFFF] cursor-pointer transition duration-300 hover:motion-safe:animate-bounce ">
@@ -467,7 +490,11 @@ const CardE = ({ user }) => {
             }}
           />
           <img
-            src={user ? user.avatar : demo.avatar}
+            src={
+              user
+                ? avatars.find((avatar) => avatar.id == user.avatar).avatar
+                : demo.avatar
+            }
             alt="avatar"
             className="w-1/3 mt-2  md:w-1/4 sm:w-1/3 rounded-full border-2 border-[#0AFFFF]"
           />
@@ -483,7 +510,7 @@ const CardE = ({ user }) => {
               return (
                 <LinkButton
                   label={link.platform}
-                  url={logos[link.platform].url+link.link}
+                  url={logos[link.platform].url + link.link}
                   btnlogo={logos[link.platform].name}
                 />
               );
@@ -535,7 +562,9 @@ const CardF = ({ user }) => {
             }}
           />
           <img
-            src={user ? user.avatar : demo.avatar}
+            src={user ? avatars.find((avatar) =>
+                    (avatar.id == user.avatar)
+                  ).avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 sm:w-1/3 md:w-1/4 rounded-full border-2 border-black shadow-xl"
           />
@@ -602,7 +631,9 @@ const CardG = ({ user }) => {
             }}
           />
           <img
-            src={user ? user.avatar : demo.avatar}
+            src={user ? avatars.find((avatar) =>
+                    (avatar.id == user.avatar)
+                  ).avatar : demo.avatar}
             alt="avatar"
             className="w-1/3 mt-2 md:w-1/4 sm:w-1/3 rounded-full border-2 border-[rgba(43,42,37,1)] shadow-xl"
           />

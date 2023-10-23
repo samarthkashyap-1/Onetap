@@ -9,14 +9,16 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Toast from "./Toast";
+import { Context } from "./Context";
+import { useContext } from "react";
 
 const Login = () => {
+  const [disabler, setdisabler] = useState(false);
+  const {loginUser, setloginUser} = useContext(Context)
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
+
 
   const {
     register: Logindetail,
@@ -32,29 +34,29 @@ const Login = () => {
 
   const loginuser = async (data) => {
     try {
+       localStorage.clear();
+      setdisabler(true)
       const res = await axios.post(
         `${import.meta.env.VITE_REACT_APP_URL}/login`,
         data
       );
-      console.log(res)
       const user = res.data;
-
-      if (!user || user === "Email is not registered") {
-       return toast.error("Invalid Credentials");
-      } else {
-        toast.success("Logged in Successfully");
-        const token = {
-          auth: true,
-          email: data.email,
-        };
-        localStorage.setItem("auth", JSON.stringify(token));
+      console.log(user.token)
+      toast.success("Logged in Successfully");
+        localStorage.setItem("token", JSON.stringify({token:user.token,
+        email:user.email
+        }));
+        setloginUser(user.email)
+        
         reset();
+        setdisabler(false)
         setTimeout(() => {
-          navigate("/");
+          navigate("/admin");
         }, 1000);
-      }
     } 
+    
        catch (error) {
+        setdisabler(false)
       if (error.response) {
         if (error.response.status === 404) {
           // Handle the case when the email is not registered
@@ -79,7 +81,7 @@ const Login = () => {
 
 
   useEffect(() => {
-    const auth = localStorage.getItem("auth");
+    const auth = localStorage.getItem("token");
     if (auth) {
       navigate("/");
     }
@@ -125,18 +127,18 @@ const Login = () => {
                     required: "Password is required",
                   })}
                 />
-                <button
-                  className=" scale-50 w-fit"
+                <img
+                  src={showpass}
+                  alt=""
+                  className=" scale-50 w-fit cursor-pointer"
                   onClick={() => setPasswordVisible(!passwordVisible)}
-                >
-                  <img src={showpass} alt="" />
-                </button>
+                />
               </div>
               {errors.password && (
                 <p className="text-red-500">{errors.password.message}</p>
               )}
 
-              <button className="w-full h-14 rounded-xl bg-sec text-white">
+              <button  disabled={disabler} className={`w-full h-14 rounded-xl bg-sec text-white  ${disabler?"cursor-wait":""}`}>
                 Login
               </button>
             </div>
@@ -151,7 +153,9 @@ const Login = () => {
               </span>
             </p>
             <p className="text-sec text-sm sm:text-xs text-center">
-              <a href="">Forgot your password?</a>
+              <Link to="/login/forgotpassword" className="text-sec">
+                Forgot your password?
+              </Link>
             </p>
           </div>
         </div>

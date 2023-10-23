@@ -1,14 +1,12 @@
-import { useState, useEffect, useLayoutEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useState, useEffect} from "react";
+
 import logo from "./assets/logo.png";
-import { useLocation, Routes, Route, Outlet } from "react-router-dom";
+import { useLocation, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 
 import axios from "axios";
 
-import Navbar from "./components/Navbar";
 
-import { Fade } from "react-awesome-reveal";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Templates from "./pages/Templates";
@@ -17,19 +15,20 @@ import Template from "./pages/Template";
 import Admin from "./pages/Admin";
 import Display from "./pages/Display";
 import Error from "./pages/Error";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { Context } from "./pages/Context";
 
+import { Context} from "./pages/Context";
+
+import Forgotpassword from "./pages/Forgotpassword";
+import Resetpass from "./pages/Resetpass";
 
 
 function App() {
- 
-  const navigate = useNavigate();
+  
+
   const [auth, setAuth] = useState(false);
   const location = useLocation();
   const [load, setLoad] = useState(false);
-  const [loginuser , setLoginuser] = useState([]);
+  const [loginUser , setloginUser] = useState();
 
 
   useEffect(() => {
@@ -41,25 +40,29 @@ function App() {
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     const storedProfiles = async () => {
-      const res = await axios.get(
+     try {
+       const res = await axios.get(
         `${import.meta.env.VITE_REACT_APP_URL}/profiles`
       );
       const data = res.data;
       setProfiles(data);
-    };
+    }
+     catch (error) {
+      console.log(error);
+      
+     }}
+    // console.log(profiles);
     storedProfiles();
-    console.log(profiles);
   }, [location.pathname]);
 
   useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem("auth"));
-    if (auth) {
-      console.log(profiles)
-      setAuth(true);
-
+    if (localStorage.getItem("token")) {
+      setloginUser(JSON.parse(localStorage.getItem("token")).email);
+      // setexistuser();
+      return;
     }
-    console.log(auth);
-  }, []);
+    // navigate("/login");
+  }, [location.pathname]);
 
   if (!load) {
     return (
@@ -69,40 +72,46 @@ function App() {
     );
   }
 
+  // console.log(loginUser)
 
 
   return (
-    <div className="min-h-screen">
-    
+    <Context.Provider value={{ loginUser, setloginUser }}>
+      <div className="min-h-screen">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Landing auth={auth} setAuth={setAuth} />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/templates"
+            element={
+              <>
+                <Templates auth={auth} setAuth={setAuth} />
+                <Footer />
+              </>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/admin/" element={<Admin allprofile={profiles} />} />
 
-      <Routes>
-        <Route path="/:username" element={<Display Profiles={profiles} />} />
-        <Route
-          path="/"
-          element={
-            <>
-              <Landing auth={auth} setAuth={setAuth} />
-              <Footer /> 
-            </>
-          }
-        />
-        <Route
-          path="/templates"
-          element={
-            <>
-              <Templates auth={auth} setAuth={setAuth} />
-              <Footer /> 
-            </>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/admin/" element={<Admin allprofile={profiles} />} />
-       
-        <Route path="/templates/:id" element={<Template />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </div>
+          <Route path="/templates/:id" element={<Template />} />
+          <Route path="/login/forgotpassword" element={<Forgotpassword />} />
+          <Route
+            path="/resetpassword/:id/:token"
+            element={<Resetpass />}
+          />
+          <Route path="/:username" element={<Display Profiles={profiles} />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </div>
+    </Context.Provider>
   );
 }
 

@@ -11,7 +11,14 @@ import avatar6 from "../assets/avatar6.svg";
 
 const AvatarSelector = ({ onAvatarSelect}) => {
   const [selectedAvatar, setSelectedAvatar] = useState("");
-  const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6];
+   const avatars = [
+     { id: 1, avatar: avatar1 },
+     { id: 2, avatar: avatar2 },
+     { id: 3, avatar: avatar3 },
+     { id: 4, avatar: avatar4 },
+     { id: 5, avatar: avatar5 },
+     { id: 6, avatar: avatar6 },
+   ];
   
  
 
@@ -28,17 +35,17 @@ const AvatarSelector = ({ onAvatarSelect}) => {
         Select Your Avatar
       </h2>
       <div className="flex flex-wrap justify-center -m-2">
-        {avatars.map((avatar, index) => (
+        {avatars.map((avatar) => (
           <div
-            key={index}
+            key={avatar.id}
             className={`m-2 cursor-pointer  rounded-full p-1  ${
               selectedAvatar === avatar ? "outline outline-sec" : ""
             }`}
-            onClick={() => handleAvatarClick(avatar)}
+            onClick={() => handleAvatarClick(avatar.id)}
           >
             <img
-              src={avatar}
-              alt={`Avatar ${index}`}
+              src={avatar.avatar}
+              alt={`Avatar ${avatar.id}`}
               className="w-20 h-20 sm:w-16 sm:h-16 rounded-full"
             />
           </div>

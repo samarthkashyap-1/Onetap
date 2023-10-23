@@ -23,29 +23,53 @@ import cardftemp from "../assets/cardftemp.png";
 import cardgtemp from "../assets/cardgtemp.png";
 import { Fade } from "react-awesome-reveal";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Toast from "./Toast";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import avatar from "../assets/avatar.png";
 import loader from "../assets/loader.json";
 import Lottie from "lottie-react";
-import { set } from "react-hook-form";
+
+import { Context } from "./Context";
+import { useContext } from "react";
+import avatar1 from "../assets/avatar1.svg";
+import avatar2 from "../assets/avatar2.svg";
+import avatar3 from "../assets/avatar3.svg";
+import avatar4 from "../assets/avatar4.svg";
+import avatar5 from "../assets/avatar5.svg";
+import avatar6 from "../assets/avatar6.svg";
+import { updateprofile, Createprofile } from "../services/api";
+
 
 
 const Admin = ({ allprofile }) => {
+   const avatars = [
+     { id: 1, avatar: avatar1 },
+     { id: 2, avatar: avatar2 },
+     { id: 3, avatar: avatar3 },
+     { id: 4, avatar: avatar4 },
+     { id: 5, avatar: avatar5 },
+     { id: 6, avatar: avatar6 },
+   ];
+   
+  // console.log("Bearer " + token);
+  const {loginUser,setloginUser} = useContext(Context)
   const location = useLocation();
-
-
+  
+  // console.log(loginUser.toString())
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem("auth")) {
+    if (localStorage.getItem("token")) {
+      // setloginUser(JSON.parse(localStorage.getItem("token")).email);
       setexistuser();
-      navigate("/login");
+      return 
+    }{
+      
     }
-  }, [location.pathname]);
+    navigate("/login");
+  }, [location.pathname,localStorage]);
 
   const [unique, setunique] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -64,7 +88,9 @@ const Admin = ({ allprofile }) => {
   const [usercard, setUsercard] = useState("");
   const [Profile, setProfile] = useState([]);
   const [existuser, setexistuser] = useState();
+
   const handleAvatarSelect = (avatar) => {
+    // console.log(avatar)
     setSelectedAvatar(avatar);
   };
 
@@ -124,11 +150,13 @@ const Admin = ({ allprofile }) => {
     const profile = {
       username: username.replace(/\s/g, ""),
       avatar: selectedAvatar,
-      email: JSON.parse(localStorage.getItem("auth"))?.email,
+      email: loginUser,
       links: data,
       card: usercard,
       id: existuser ? existuser.id : "",
     };
+
+    console.log(existuser)
 
     try {
       if (existuser) {
@@ -147,7 +175,7 @@ const Admin = ({ allprofile }) => {
     
     setCurrentStep(1);
     
-    window.location.reload();
+    // window.location.reload();
     
   };
 
@@ -155,49 +183,74 @@ const Admin = ({ allprofile }) => {
 
   const patchdata = async (profile) => {
     try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
+        },
+      };
       setLoading(true);
-      const res = await axios.put(
-        `${import.meta.env.VITE_REACT_APP_URL}/profiles/${existuser.id}`,
-        profile
-      );
-      const data = res.data;
+      const data = await updateprofile(existuser.id, profile,config);
+      console.log(data)
       setLoading(false);
       toast.success("Profile Updated Successfully");
       window.open(`/${profile.username}`, "_blank");
     } catch (error) {
       setLoading(false);
+      console.log(error.message)
+        if (error.response && error.response.status === 401) {
+      // Unauthorized access, redirect to the login page
+       localStorage.clear();
+      toast.error("Unauthorized access. Please log in.");
+      navigate('/login');
       toast.error("Something went wrong");
-    }
+    }}
   };
 
   const checkuserexist = () => {
-    const email = JSON.parse(localStorage.getItem("auth"))?.email;
-    console.log(email);
-    const finduser = allprofile.find((profile) => profile.email === email);
-    console.log(finduser);
+    console.log("checkuser run test")
+    if (loginUser){
+  
+    const finduser = allprofile.find((profile) => profile.email === loginUser);
+    
 
     if (finduser) {
-      setexistuser(finduser);
-      setUsername((prev) => finduser.username);
       
+
+      setUsername((prev) => finduser.username);
       setData((prev) => finduser.links);
-      console.log(finduser);
+      setUsercard((prev) => finduser.card);
+      setSelectedAvatar((prev) => finduser.avatar);
+      setexistuser(finduser);
+     
     }
+      console.log(existuser);
   };
+}
 
   const postdata = async (profile) => {
     try {
       setLoading(true);
-      const res = await axios.post(
-        `${import.meta.env.VITE_REACT_APP_URL}/profiles`,
-        profile
-      );
+      const config = {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).token
+          }`,
+        },
+      };
+      const res = await Createprofile(profile,config)
       const data = res.data;
       setLoading(false);
       toast.success("Profile Updated Successfully");
       window.open(`/${profile.username}`, "_blank");
     } catch (error) {
       setLoading(false);
+      console.log(error.message);
+      if (error.response && error.response.status === 401) {
+        localStorage.clear()
+        // Unauthorized access, redirect to the login page
+        toast.error("Unauthorized access. Please log in.");
+        navigate("/login");
+      }
       toast.error("Something went wrong");
     }
   };
@@ -208,7 +261,7 @@ const Admin = ({ allprofile }) => {
 
   useEffect(() => {
     checkuserexist();
-  }, [location.pathname, localStorage]);
+  }, [location.pathname, localStorage, loginUser]);
 
   useEffect(() => {
     if (username === "" || username === null || username === undefined) {
@@ -232,7 +285,7 @@ const Admin = ({ allprofile }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentStep]);
-  
+  // console.log(existuser)
 
 
   return (
@@ -294,10 +347,10 @@ const Admin = ({ allprofile }) => {
                   )}
                 </div>
               </div>
-              <div className="flex sm:flex-col">
+              <div className="flex flex-col ">
                 <div className="flex-1 flex">
                   <img
-                    src={selectedAvatar ? selectedAvatar : avatar}
+                    src={selectedAvatar ? avatars.find((avatar)=>avatar.id == selectedAvatar).avatar : avatar}
                     alt=""
                     className="w-36 m-auto drop-shadow-2xl rounded-full"
                   />
@@ -322,7 +375,7 @@ const Admin = ({ allprofile }) => {
                   type="text"
                   placeholder="Create a username"
                   className=" block p-3 border-2 rounded-md w-full my-1 outline-sec"
-                  defaultValue={JSON.parse(localStorage.getItem("auth"))?.email}
+                  defaultValue={loginUser}
                   onChange={(e) => setUsername((prev) => e.target.value)}
                   readOnly
                 />
@@ -408,7 +461,7 @@ const Admin = ({ allprofile }) => {
           )}
           {currentStep === 1 && (
             <button
-              className={`bg-primary px-5 py-3 text-white rounded-lg ${
+              className={`bg-primary px-5 py-3 text-white rounded-lg ml-auto sm:mx-auto ${
                 username === "" || selectedAvatar === "" || !unique
                   ? "opacity-50 cursor-not-allowed"
                   : ""

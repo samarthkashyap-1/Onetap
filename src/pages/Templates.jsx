@@ -1,9 +1,9 @@
 import React from 'react'
 import {CardA, CardB , CardC , CardD, CardE, CardF, CardG} from '../components/Cards'
 import Navbar from '../components/Navbar';
-import back from "../assets/back.png";
+
 import {Link} from "react-router-dom"
-import Footer from '../components/Footer';
+
 import { Fade } from "react-awesome-reveal";
 import cardatemp from "../assets/cardatemp.png";
 import cardbtemp from "../assets/cardbtemp.png";
