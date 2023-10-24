@@ -11,16 +11,20 @@ const Discover = () => {
           backgroundImage: `url(${wave})`,
         }}
       >
-        <div className=" h-screen p-20 flex flex-col gap-10 items-center justify-center">
-          <div className="max-w-lg text-center mt-20 mx-auto sm:mt-96">
-            <h1 className="text-5xl mb-4 text-white">Welcome to OneTap</h1>
+        <div className=" min-h-screen p-20 flex flex-col gap-10 items-center  sm:px-10 justify-center">
+          <div className="max-w-lg text-center mt-20 mx-auto sm:mt-28 ">
+            <h1 className="text-5xl mb-4 text-white sm:text-4xl">
+              Welcome to OneTap
+            </h1>
             <p className="text-lg mb-8">
               Your All-In-One Solution for Personalized Link Sharing
             </p>
           </div>
 
           <div className="text-center">
-            <h1 className="text-4xl font-semibold mb-4">What is OneTap?</h1>
+            <h1 className="text-4xl sm:text-3xl font-semibold mb-4 sm:text-white">
+              What is OneTap?
+            </h1>
             <p className="text-lg mb-8">
               OneTap is your all-in-one solution for creating a personalized
               landing page for all your important links. Say goodbye to the
@@ -38,7 +42,7 @@ const Discover = () => {
       </div>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 px-20 gap-6">
         {/* Feature 1 */}
-        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out">
+        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
           <h2 className="text-xl font-semibold mb-2">
             User-Friendly Interface
           </h2>
@@ -49,7 +53,7 @@ const Discover = () => {
         </div>
 
         {/* Feature 2 */}
-        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out">
+        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
           <h2 className="text-xl font-semibold mb-2">Multiple Link Support</h2>
           <p className="text-gray-600">
             Share your website, social media profiles, blog, products, and more,
@@ -59,7 +63,7 @@ const Discover = () => {
         </div>
 
         {/* Feature 3 */}
-        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out">
+        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
           <h2 className="text-xl font-semibold mb-2">Beautiful Templates</h2>
           <p className="text-gray-600">
             Choose from a selection of professionally designed templates to make
@@ -68,7 +72,7 @@ const Discover = () => {
         </div>
 
         {/* Feature 6 */}
-        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out">
+        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
           <h2 className="text-xl font-semibold mb-2">Social Integration</h2>
           <p className="text-gray-600">
             Connect your social media for a seamless online presence. Share your
@@ -77,7 +81,7 @@ const Discover = () => {
         </div>
 
         {/* Feature 7 */}
-        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out">
+        <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
           <h2 className="text-xl font-semibold mb-2">SEO Optimization</h2>
           <p className="text-gray-600">
             Improve your online visibility with our SEO-friendly OneTap pages.
@@ -85,12 +89,12 @@ const Discover = () => {
         </div>
       </div>
       {!localStorage.getItem("token") && (
-        <div className="flex mt-20">
-          <Link
-            to="/signup"
-            className="w-fit shadow-xl p-5 mx-auto text-center  rounded-xl sm:max-h-10 bg-primary text-sec "
-          >
-            Get Started
+        <div className="flex mt-20 justify-center" >
+          <Link to="/signup">
+            <button className="w-fit mx-auto shadow-xl p-5 text-center hover:bg-sec hover:text-white transition-all duration-200   rounded-xl bg-primary text-sec ">
+              
+              Get Started
+            </button>
           </Link>
         </div>
       )}

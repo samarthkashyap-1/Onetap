@@ -78,7 +78,7 @@ const Landing = ({ auth, setAuth }) => {
                       !localStorage.getItem("token") ? "/login" : "/admin"
                     }`}
                   >
-                    <button className="w-fit shadow-xl px-5  h-14 rounded-xl sm:max-h-10 bg-primary text-sec ">
+                    <button className="w-fit hover:bg-sec hover:text-white transition-all duration-200  shadow-xl px-5  h-14 rounded-xl sm:max-h-10 bg-primary text-sec ">
                       Claim Your Link
                     </button>
                   </Link>
