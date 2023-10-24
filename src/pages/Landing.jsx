@@ -7,8 +7,10 @@ import wave from "../assets/wavee.svg";
 import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
-import blob from "../assets/blob.svg";
-import demo from "../assets/landing.png";
+import cardatemp from "../assets/cardatemp.png";
+import cardgtemp from "../assets/cardgtemp.png";
+import cardctemp from "../assets/cardctemp.png";
+import carddtemp from "../assets/carddtemp.png";
 import { Fade } from "react-awesome-reveal";
 import Tilt from "react-parallax-tilt";
 import { toast} from "react-toastify";
@@ -56,13 +58,13 @@ const Landing = ({ auth, setAuth }) => {
           }}
         >
           <Navbar auth={auth} setAuth={setAuth} />
-          <div className="h-screen px-20 sm:px-10 flex ">
-            <div className=" mt-40 text-primary flex-1">
+          <div className="min-h-screen p-20 sm:px-10 flex sm:flex-col ">
+            <div className=" mt-20 text-primary flex-1">
               <Fade triggerOnce>
                 <h1 className="text-2xl md:text-xl mt-10 text-white">
                   Hola!!!
                 </h1>
-                <h1 className="text-2xl md:text-xl  mt-6">
+                <h1 className="text-2xl md:text-xl mt-6">
                   Welcome to{" "}
                   <p className="text-white md:text-4xl text-6xl">One Tap</p>{" "}
                 </h1>
@@ -86,21 +88,25 @@ const Landing = ({ auth, setAuth }) => {
               </Fade>
             </div>
 
-            <div className=" flex-1 mt-40 z-10 sm:hidden ">
-              <img
-                src={blob}
-                alt=""
-                className=" scale-75 mt-10 -z-10 md:mt-40 absolute top-0"
-              />
+            <div className="flex-1 flex justify-center relative rounded-lg">
               <Fade triggerOnce>
-                <Tilt>
-                  <img
-                    src={demo}
-                    loading="lazy"
-                    alt=""
-                    id="tilt"
-                    className="scale-75 mt-10 z-10 cursor-pointer"
-                  />
+                <Tilt
+                  className="parallax-effectt  rounded-lg  cursor-pointer sm:w-32 mt-32  sm:h-64"
+                  perspective={500}
+                >
+                  <div className="inner-element w-full h-full ">
+                    <img
+                      src={cardgtemp}
+                      alt=""
+                      className="absolute rounded-lg w-28 sm:w-20 h-fit -bottom-5 -right-12 sm:right- sm:bottom-5"
+                    />
+
+                    <img
+                      src={carddtemp}
+                      alt=""
+                      className="absolute rounded-lg w-28 h-fit sm:w-20 -top-5 -left-16  sm:-left-10 sm:top-4"
+                    />
+                  </div>
                 </Tilt>
               </Fade>
             </div>

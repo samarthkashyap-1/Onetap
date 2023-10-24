@@ -36,12 +36,39 @@ height: 500px;
   
   cursor: pointer;
 } */
-/* .parallax-effect {
-    background-image: url("./assets/blob.svg");
-     background-repeat: no-repeat;
-  background-attachment: fixed;
+.parallax-effect {
+    background-image: url("./assets/cardetemp.png");
+
+
+  /* Center and scale the image nicely */
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 20px;
   display: flex;
+  width: 200px;
+  height: 400px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+
+
+  transform-style: preserve-3d;
+
+}
+.parallax-effectt {
+    background-image: url("./assets/cardatemp.png");
+
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 20px;
+  display: flex;
+  width: 220px;
+  height: 400px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -53,12 +80,8 @@ height: 500px;
 }
 .inner-element {
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 35px;
-  font-style: italic;
-  color: white;
+  
+
+
   transform: translateZ(60px);
-} */
+}
