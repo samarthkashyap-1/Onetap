@@ -47,6 +47,11 @@ export const Createuser = async(data)=>{
 }
 
 export const getuser = async(username)=>{
-    const res = axios.get(`${BASEURL}/${username}`);
+    const res =await axios.get(`${BASEURL}/${username}`);
     return res
+}
+
+export const getprofile = async()=>{
+  const res = await axios.get(`${BASEURL}/profiles`)
+  return res;
 }

@@ -65,7 +65,7 @@ const Template = () => {
         <Fade triggerOnce>
 
     <div className=''>
-
+    
       <Card/>
     </div>
     </Fade>

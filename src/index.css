@@ -36,3 +36,29 @@ height: 500px;
   
   cursor: pointer;
 } */
+/* .parallax-effect {
+    background-image: url("./assets/blob.svg");
+     background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+
+
+  transform-style: preserve-3d;
+
+}
+.inner-element {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  font-style: italic;
+  color: white;
+  transform: translateZ(60px);
+} */

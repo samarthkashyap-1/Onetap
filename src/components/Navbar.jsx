@@ -74,12 +74,18 @@ const [authcheck, setauthcheck] = useState(false)
                 Templates
               </li>
             </NavLink>
+             <NavLink to='/discover'>
+
             <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
               Discover
             </li>
+             </NavLink>
+            <NavLink to='/m'>
+
             <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
               Contact Us
             </li>
+            </NavLink>
           </ul>
         </div>
         <div className="my-auto w-[20%] md:w-full">
@@ -113,7 +119,7 @@ const [authcheck, setauthcheck] = useState(false)
               <li>
                 <button onClick={()=>{
                   localStorage.removeItem("token")
-                  setAuth(false)
+                  
                   window.location.reload()
 
                 }} className="px-5  md:w-24 h-14 rounded-xl sm:max-h-10 bg-sec">

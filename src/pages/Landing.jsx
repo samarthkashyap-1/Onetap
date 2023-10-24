@@ -10,7 +10,7 @@ import Navbar from "../components/Navbar";
 import blob from "../assets/blob.svg";
 import demo from "../assets/landing.png";
 import { Fade } from "react-awesome-reveal";
-
+import Tilt from "react-parallax-tilt";
 import { toast} from "react-toastify";
 
 import Toast from "./Toast";
@@ -93,13 +93,15 @@ const Landing = ({ auth, setAuth }) => {
                 className=" scale-75 mt-10 -z-10 md:mt-40 absolute top-0"
               />
               <Fade triggerOnce>
-                <img
-                  src={demo}
-                  loading="lazy"
-                  alt=""
-                  id="tilt"
-                  className="scale-90 mt-10 z-10"
-                />
+                <Tilt>
+                  <img
+                    src={demo}
+                    loading="lazy"
+                    alt=""
+                    id="tilt"
+                    className="scale-75 mt-10 z-10 cursor-pointer"
+                  />
+                </Tilt>
               </Fade>
             </div>
           </div>
@@ -107,17 +109,21 @@ const Landing = ({ auth, setAuth }) => {
       </Fade>
 
       <div className=" px-20 sm:p-5  my-10 sm:px-10 ">
-        <h1 className="text-4xl text-primary my-8">About Us</h1>
+        <h1 className="text-3xl font-semibold text-primary my-8">About Us</h1>
         <p className="text-sec px-10 sm:px-0 text-lg mt-8">
-          We're dedicated to making your life simpler and more streamlined. With
-          "One Tap," you can access all the essential information and resources
-          you need in just a single tap. Our commitment is to provide
-          convenience at your fingertips.
+          OneTap is a versatile linking and sharing app that allows you to
+          create a stunning, personalized landing page for all your important
+          links. Say goodbye to the hassle of sharing multiple links across
+          social media profiles, email signatures, or marketing materials. With
+          OneTap, you can create a single, visually appealing link that serves
+          as your digital business card.
         </p>
       </div>
 
       <div className=" px-20 p-10 sm:p-5 sm:px-10 ">
-        <h1 className="text-4xl text-primary">Reach Us</h1>
+        <h1 className="text-3xl  text-primary font-semibold">
+          Ask Us Anything
+        </h1>
         <div className="">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-4 mt-8">
@@ -168,7 +174,9 @@ const Landing = ({ auth, setAuth }) => {
               <div className="flex justify-end w-1/2 mx-auto">
                 <button
                   disabled={disabler}
-                  className={`w-40 h-14 rounded-xl bg-sec text-white ${disabler?" cursor-wait":""}`}
+                  className={`w-40 h-14 rounded-xl bg-sec text-white ${
+                    disabler ? " cursor-wait" : ""
+                  }`}
                 >
                   Send
                 </button>

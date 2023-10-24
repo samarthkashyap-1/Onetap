@@ -20,6 +20,9 @@ import { Context} from "./pages/Context";
 
 import Forgotpassword from "./pages/Forgotpassword";
 import Resetpass from "./pages/Resetpass";
+import { getprofile } from "./services/api";
+import Home from "./pages/Home";
+import Discover from "./pages/Discover";
 
 
 function App() {
@@ -41,9 +44,7 @@ function App() {
   useEffect(() => {
     const storedProfiles = async () => {
      try {
-       const res = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_URL}/profiles`
-      );
+       const res = await getprofile()
       const data = res.data;
       setProfiles(data);
     }
@@ -79,7 +80,7 @@ function App() {
     <Context.Provider value={{ loginUser, setloginUser }}>
       <div className="min-h-screen">
         <Routes>
-          <Route
+          {/* <Route
             path="/"
             element={
               <>
@@ -96,7 +97,16 @@ function App() {
                 <Footer />
               </>
             }
-          />
+          /> */}
+
+          <Route path="/" element={<Home/>}>
+            <Route index element={<Landing/>}/>
+            <Route path="/templates" element={<Templates/>}/>
+            <Route path="/discover" element={<Discover/>}/>
+
+
+
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin/" element={<Admin allprofile={profiles} />} />
