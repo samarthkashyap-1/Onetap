@@ -32,20 +32,20 @@ const Discover = () => {
             </div>
             <div className="flex-1 flex justify-center relative rounded-lg">
               <Tilt
-                className="parallax-effect mt-14 cursor-pointer sm:w-32  sm:h-64"
+                className="parallax-effect mt-14 cursor-pointer "
                 perspective={500}
               >
                 <div className="inner-element w-full h-full ">
                   <img
                     src={cardftemp}
                     alt=""
-                    className="absolute rounded-lg w-28 sm:w-20 h-fit -bottom-5 -right-16 sm:right- sm:bottom-5"
+                    className="absolute rounded-lg w-28 sm:w-24 h-fit -bottom-5 -right-16 sm:-right-6 sm:bottom-0"
                   />
 
                   <img
                     src={cardbtemp}
                     alt=""
-                    className="absolute rounded-lg w-28 h-fit sm:w-20 -top-2 -left-20  sm:-left-10 sm:top-4"
+                    className="absolute rounded-lg w-28 h-fit sm:w-24 -top-2 -left-20  sm:-left-10 sm:top-0"
                   />
                 </div>
               </Tilt>
@@ -60,9 +60,9 @@ const Discover = () => {
           <h1 className="text-4xl font-semibold mb-4">Why OneTap</h1>
         </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 px-20 gap-6">
-            {/* Feature 1 */}
-            <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
-          <Fade triggerOnce>
+          {/* Feature 1 */}
+          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
+            <Fade triggerOnce>
               <h2 className="text-xl font-semibold mb-2">
                 User-Friendly Interface
               </h2>
@@ -71,12 +71,12 @@ const Discover = () => {
                 customize your OneTap landing page. No technical skills
                 required!
               </p>
-          </Fade>
-            </div>
+            </Fade>
+          </div>
 
           {/* Feature 2 */}
-            <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
-          <Fade triggerOnce>
+          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
+            <Fade triggerOnce>
               <h2 className="text-xl font-semibold mb-2">
                 Multiple Link Support
               </h2>
@@ -85,11 +85,11 @@ const Discover = () => {
                 more, all in one place. Make it easy for your audience to
                 discover everything you have to offer.
               </p>
-          </Fade>
-            </div>
+            </Fade>
+          </div>
           {/* Feature 3 */}
-            <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
-          <Fade triggerOnce>
+          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
+            <Fade triggerOnce>
               <h2 className="text-xl font-semibold mb-2">
                 Beautiful Templates
               </h2>
@@ -97,40 +97,40 @@ const Discover = () => {
                 Choose from a selection of professionally designed templates to
                 make your OneTap page uniquely yours.
               </p>
-          </Fade>
-            </div>
+            </Fade>
+          </div>
           {/* Feature 6 */}
-            <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
-          <Fade triggerOnce>
+          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
+            <Fade triggerOnce>
               <h2 className="text-xl font-semibold mb-2">Social Integration</h2>
               <p className="text-gray-600">
                 Connect your social media for a seamless online presence. Share
                 your OneTap page on Instagram, Twitter, TikTok, and more.
               </p>
-          </Fade>
-            </div>
+            </Fade>
+          </div>
 
           {/* Feature 7 */}
 
           <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
-          <Fade triggerOnce>
-            <h2 className="text-xl font-semibold mb-2">SEO Optimization</h2>
-            <p className="text-gray-600">
-              Improve your online visibility with our SEO-friendly OneTap pages.
-            </p>
-          </Fade>
+            <Fade triggerOnce>
+              <h2 className="text-xl font-semibold mb-2">SEO Optimization</h2>
+              <p className="text-gray-600">
+                Improve your online visibility with our SEO-friendly OneTap
+                pages.
+              </p>
+            </Fade>
           </div>
         </div>
       </Fade>
-      {!localStorage.getItem("token") && (
-        <div className="flex mt-20 justify-center">
-          <Link to="/signup">
-            <button className="w-fit mx-auto shadow-xl p-5 text-center hover:bg-sec hover:text-white transition-all duration-200   rounded-xl bg-primary text-sec ">
-              Get Started
-            </button>
-          </Link>
-        </div>
-      )}
+
+      <div className="flex mt-20 justify-center">
+        <Link to={!localStorage.getItem("token")?"/signup":"/admin"}>
+          <button className="w-fit mx-auto shadow-xl p-5 text-center hover:bg-sec hover:text-white transition-all duration-200   rounded-xl bg-primary text-sec ">
+            Get Started
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -41,7 +41,7 @@ const [authcheck, setauthcheck] = useState(false)
         } max-w-[80%] mx-auto mt-10 rounded-xl bg-primary px-5 transition-all duration-300 ease-in-out text-white font-audiowide`}
       >
         <div className=" md:mt-2 sm:mt-4 flex justify-between items-center my-auto">
-          <Link to="/">
+          <Link to="/" onClick={() => (!toggle ? pass : settoggle(!toggle))}>
             <img
               src={logo}
               alt="logo"
@@ -69,66 +69,66 @@ const [authcheck, setauthcheck] = useState(false)
 
         <div className="my-auto min-w-[30%] md:w-full md:mx-auto ">
           <ul className="flex justify-between md:flex-col md:gap-5 ">
-            <NavLink to="/templates">
+            <NavLink to="/templates" onClick={() => settoggle(!toggle)}>
               <li className="hover:text-sec aria-[current=page]:text-blue-400 transition-colors  duration-300 text-center ease-in-out cursor-pointer">
                 Templates
               </li>
             </NavLink>
-             <NavLink to='/discover'>
-
-            <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
-              Discover
-            </li>
-             </NavLink>
-            <NavLink to='/m'>
-
-            <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
-              Contact Us
-            </li>
+            <NavLink to="/discover" onClick={() => settoggle(!toggle)}>
+              <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
+                Discover
+              </li>
             </NavLink>
+            <Link onClick={() => settoggle(!toggle)}>
+              <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
+                Contact Us
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="my-auto w-[20%] md:w-full">
           <ul className="flex justify-evenly ">
-            {!localStorage.getItem("token") ? <>
-            <Link to="/login">
-              <li>
-                <button className="px-5 sm:px-0  sm:w-20 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
-                  Login
-                </button>
-              </li>
-            </Link>
-            <Link to="/Signup">
-              <li>
-                <button className="px-5  md:w-24 h-14 rounded-xl sm:max-h-10 bg-sec">
-                  Signup
-                </button>
-              </li>
-            </Link>
-            </>
-            :
-            <>
-            <Link to="/admin">
-              <li>
-                <button className="px-5 sm:px-0  sm:w-20 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
-                  Admin
-                </button>
-              </li>
-            </Link>
-            
-              <li>
-                <button onClick={()=>{
-                  localStorage.removeItem("token")
-                  
-                  window.location.reload()
+            {!localStorage.getItem("token") ? (
+              <>
+                <Link to="/login">
+                  <li>
+                    <button className="px-5 sm:px-0  sm:w-20 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
+                      Login
+                    </button>
+                  </li>
+                </Link>
+                <Link to="/Signup">
+                  <li>
+                    <button className="px-5  md:w-24 h-14 rounded-xl sm:max-h-10 bg-sec">
+                      Signup
+                    </button>
+                  </li>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/admin">
+                  <li>
+                    <button className="px-5 sm:px-0  sm:w-20 h-14 rounded-lg sm:max-h-10  bg-white text-primary">
+                      Admin
+                    </button>
+                  </li>
+                </Link>
 
-                }} className="px-5  md:w-24 h-14 rounded-xl sm:max-h-10 bg-sec">
-                  Logout
-                </button>
-              </li>
-            
-            </>
-            }
+                <li>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem("token");
+
+                      window.location.reload();
+                    }}
+                    className="px-5  md:w-24 h-14 rounded-xl sm:max-h-10 bg-sec"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
