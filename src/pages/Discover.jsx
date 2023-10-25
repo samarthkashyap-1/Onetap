@@ -21,7 +21,7 @@ const Discover = () => {
               <h1 className="text-4xl sm:text-3xl  mb-4 text-white">
                 What is OneTap?
               </h1>
-              <p className="text-lg mb-8">
+              <p className="text-lg mb-8 text-primary">
                 OneTap is your all-in-one solution for creating a personalized
                 landing page for all your important links. Say goodbye to the
                 hassle of sharing multiple links across social media profiles,
@@ -30,23 +30,27 @@ const Discover = () => {
                 digital business card.
               </p>
             </div>
-            <div className="flex-1 flex justify-center relative rounded-lg">
+            <div className="flex-1 flex justify-center sm:ml-20  relative rounded-lg">
               <Tilt
-                className="parallax-effect mt-14 cursor-pointer "
+                tiltAngleXInitial={10}
+                tiltAngleYInitial={100}
+                className="parallax-effect mt-32 ml-20 cursor-pointer "
                 perspective={500}
               >
                 <div className="inner-element w-full h-full ">
                   <img
                     src={cardftemp}
                     alt=""
-                    className="absolute rounded-lg w-28 sm:w-24 h-fit -bottom-5 -right-16 sm:-right-6 sm:bottom-0"
+                    className="absolute rounded-lg w-36 sm:w-32 h-fit top-10 sm:translate-z-16"
                   />
 
-                  <img
-                    src={cardbtemp}
-                    alt=""
-                    className="absolute rounded-lg w-28 h-fit sm:w-24 -top-2 -left-20  sm:-left-10 sm:top-0"
-                  />
+                  <div className="inner-elementt">
+                    <img
+                      src={cardbtemp}
+                      alt=""
+                      className="absolute rounded-lg w-24 h-fit sm:w-20 top-20 sm:translate-z-0 "
+                    />
+                  </div>
                 </div>
               </Tilt>
             </div>
@@ -125,7 +129,7 @@ const Discover = () => {
       </Fade>
 
       <div className="flex mt-20 justify-center">
-        <Link to={!localStorage.getItem("token")?"/signup":"/admin"}>
+        <Link to={!localStorage.getItem("token") ? "/signup" : "/admin"}>
           <button className="w-fit mx-auto shadow-xl p-5 text-center hover:bg-sec hover:text-white transition-all duration-200   rounded-xl bg-primary text-sec ">
             Get Started
           </button>

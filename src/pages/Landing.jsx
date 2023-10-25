@@ -94,7 +94,7 @@ const Landing = ({ auth, setAuth }) => {
                   className="parallax-effectt rounded-lg  cursor-pointer  mt-32  "
                   perspective={500}
                 >
-                  <div className="inner-element w-full h-full ">
+                  <div className="inner-elementland w-full h-full ">
                     <img
                       src={cardgtemp}
                       alt=""
