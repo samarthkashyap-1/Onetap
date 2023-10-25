@@ -7,6 +7,7 @@ import cardbtemp from "../assets/cardbtemp.png";
 import Tilt from 'react-parallax-tilt';
 import { Fade } from 'react-awesome-reveal';
 const Discover = () => {
+  window.scrollTo(0, 0);
   return (
     <div>
       <header

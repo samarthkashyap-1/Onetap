@@ -15,6 +15,7 @@ import cardgtemp from "../assets/cardgtemp.png";
 
 
 const Templates = ({auth, setAuth}) => {
+  window.scrollTo(0, 0);
   // create an object which have the details of the cards and images and index
 
   const cards = [

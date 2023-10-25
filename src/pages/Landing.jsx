@@ -19,6 +19,7 @@ import Toast from "./Toast";
 import { Contactapi } from "../services/api";
 
 const Landing = ({ auth, setAuth }) => {
+  window.scrollTo(0, 0);
   const [disabler,setdisabler] = useState(false)
   const {
     register,
