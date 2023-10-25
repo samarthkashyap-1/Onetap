@@ -10,11 +10,13 @@ import Toast from "./Toast";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Createuser } from "../services/api";
-
+import loader from "../assets/loader.json"
+import Lottie from "lottie-react";
 const Signup = () => {
   const navigate = useNavigate();
   const [disabler, setdisabler] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const {
     register: Signupdetail,
@@ -26,6 +28,8 @@ const Signup = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    data.email = data.email.toLowerCase();
+    console.log(data)
     postuser(data);
   };
 
@@ -33,6 +37,7 @@ const Signup = () => {
     try {
       //  localStorage.clear();
       setdisabler(true);
+      
       const res = await Createuser(data);
       const user = res.data;
       localStorage.setItem(
@@ -49,11 +54,13 @@ const Signup = () => {
       console.log(user);
     } catch (error) {
       setdisabler(false);
+      // console.log(error)
       if (error.response) {
         if (error.response.status === 400) {
-          toast.error("Email is already registered");
+          return toast.error("Email is already registered");
         }
       }
+      toast.error("An error occurred. Please try again later");
     }
   };
 
@@ -66,6 +73,13 @@ const Signup = () => {
 
   return (
     <div className="flex flex-col gap-10 h-screen px-10">
+      <div
+        className={`h-screen bg-black bg-opacity-50 z-50 absolute left-0 right-0 top-0 flex flex-col justify-center items-center
+         ${disabler ? "" : "hidden"}`}
+      >
+        <Lottie animationData={loader} className="w-28 sm:w-16" />
+        <p className="text-white text-sm animate-bounce">Setting up your account</p>
+      </div>
       <Toast />
       <Fade triggerOnce>
         <Link to="/">

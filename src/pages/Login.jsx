@@ -11,7 +11,8 @@ import { toast } from "react-toastify";
 import Toast from "./Toast";
 import { Context } from "./Context";
 import { useContext } from "react";
-
+import loader from "../assets/loader.json"
+import Lottie from "lottie-react";
 const Login = () => {
   const [disabler, setdisabler] = useState(false);
   const {loginUser, setloginUser} = useContext(Context)
@@ -29,6 +30,8 @@ const Login = () => {
 
   const onSubmit = (data) => {
     //  console.log(data);
+    data.email = data.email.toLowerCase();
+    console.log(data)
     loginuser(data);
   };
 
@@ -68,7 +71,7 @@ const Login = () => {
           toast.error('Invalid email or password');
         } else {
           // Handle other errors
-          console.error('An error occurred:', error);
+          // console.error('An error occurred:', error);
           toast.error('An error occurred. Please try again later.');
         }
       } else {
@@ -88,6 +91,15 @@ const Login = () => {
   }, []);
   return (
     <div className="flex flex-col gap-10 h-screen px-10">
+      <div
+        className={`h-screen bg-black bg-opacity-50 z-50 absolute left-0 right-0 top-0 flex flex-col justify-center items-center
+         ${disabler ? "" : "hidden"}`}
+      >
+        <Lottie animationData={loader} className="w-28 sm:w-16" />
+        <p className="text-white text-sm animate-bounce">
+          Logging you in
+        </p>
+      </div>
       <Toast />
       <Fade triggerOnce>
         <Link to="/">
@@ -138,7 +150,12 @@ const Login = () => {
                 <p className="text-red-500">{errors.password.message}</p>
               )}
 
-              <button  disabled={disabler} className={`w-full h-14 rounded-xl bg-sec text-white  ${disabler?"cursor-wait":""}`}>
+              <button
+                disabled={disabler}
+                className={`w-full h-14 rounded-xl bg-sec text-white  ${
+                  disabler ? "cursor-wait" : ""
+                }`}
+              >
                 Login
               </button>
             </div>

@@ -14,31 +14,36 @@ const Forgotpassword = () => {
      localStorage.clear();
      const [loading, setLoading] = useState(false);
     const [emailtoreset, setemailtoreset] = useState()
-    console.log(emailtoreset)
-
+    
     const resetPass = async (emailtoreset)=>{
+      console.log(emailtoreset.toLowerCase())
         
     try {
         setLoading(true)
         const data = {
-          email: emailtoreset,
+          email: emailtoreset.toLowerCase(),
         };
     const result = await Forgotpasswordapi(data)
         console.log(result.data.link)
     if(result.status===200){
-        console.log(result)
+        
         toast.success("Reset link has been sent");
         setemailtoreset("")
     }else{
         toast.error("Something went wrong");
     }
+    console.log("false running");
     setLoading(false)
 
 } catch (error) {
     setLoading(false)
+    
+    // if(error.response.status===500 || error.code==="") return toast.error("Oops! Something went wrong")
+    if(error.code==="ERR_NETWORK" || error.response.status===500 ) return toast.error("An error occurred. Please try again later");
     if(error.response.status===404) return toast.error("Email is not registered")
     if(error.response.status===400) return toast.error("Email is not valid")
-    if(error.response.status===500) return toast.error("Oops! Something went wrong")
+    // toast.error("Oops! Something went wrong")
+    
 }
     }
   return (
