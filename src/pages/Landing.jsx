@@ -1,20 +1,14 @@
 import React from "react";
 import { useState} from "react";
 import { useForm } from "react-hook-form";
-
 import wave from "../assets/wavee.svg";
-
 import { Link } from "react-router-dom";
-
 import Navbar from "../components/Navbar";
-import cardatemp from "../assets/cardatemp.png";
 import cardgtemp from "../assets/cardgtemp.png";
-import cardctemp from "../assets/cardctemp.png";
 import carddtemp from "../assets/carddtemp.png";
 import { Fade } from "react-awesome-reveal";
 import Tilt from "react-parallax-tilt";
 import { toast} from "react-toastify";
-
 import Toast from "./Toast";
 import { Contactapi } from "../services/api";
 
@@ -97,15 +91,15 @@ const Landing = ({ auth, setAuth }) => {
                 >
                   <div className="inner-elementland w-full h-full ">
                     <img
-                      src={cardgtemp}
+                      src={carddtemp}
                       alt=""
-                      className="absolute rounded-lg w-28 sm:w-24 h-fit -bottom-5 -right-12 sm:-right-10 sm:bottom-0"
+                      className="absolute rounded-lg w-28 check sm:w-24 h-fit -bottom-5 -right-12 sm:-right-10 sm:bottom-0"
                     />
 
                     <img
-                      src={carddtemp}
+                      src={cardgtemp}
                       alt=""
-                      className="absolute rounded-lg w-28 h-fit sm:w-24 -top-5 -left-16  sm:-left-10 sm:top-0"
+                      className="absolute rounded-lg w-28 check  h-fit sm:w-24 -top-5 -left-16  sm:-left-10 sm:top-0"
                     />
                   </div>
                 </Tilt>

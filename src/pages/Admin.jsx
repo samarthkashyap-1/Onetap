@@ -5,22 +5,6 @@ import back from "../assets/back.png";
 import { Link } from "react-router-dom";
 import AvatarSelector from "../components/AvatarSelector";
 import del from "../assets/delete.svg";
-import x from "../assets/x.png";
-import insta from "../assets/insta.svg";
-import behance from "../assets/behance.svg";
-import github from "../assets/git.svg";
-import linkedin from "../assets/link.svg";
-import youtube from "../assets/youtube.svg";
-import pinterest from "../assets/pinterest.svg";
-import twitch from "../assets/twitch.svg";
-import portfolio from "../assets/portfolio.png";
-import cardatemp from "../assets/cardatemp.png";
-import cardbtemp from "../assets/cardbtemp.png";
-import cardctemp from "../assets/cardctemp.png";
-import carddtemp from "../assets/carddtemp.png";
-import cardetemp from "../assets/cardetemp.png";
-import cardftemp from "../assets/cardftemp.png";
-import cardgtemp from "../assets/cardgtemp.png";
 import { Fade } from "react-awesome-reveal";
 import { useNavigate } from "react-router-dom";
 import Toast from "./Toast";
@@ -32,25 +16,15 @@ import Lottie from "lottie-react";
 
 import { Context } from "./Context";
 import { useContext } from "react";
-import avatar1 from "../assets/avatar1.svg";
-import avatar2 from "../assets/avatar2.svg";
-import avatar3 from "../assets/avatar3.svg";
-import avatar4 from "../assets/avatar4.svg";
-import avatar5 from "../assets/avatar5.svg";
-import avatar6 from "../assets/avatar6.svg";
 import { updateprofile, Createprofile } from "../services/api";
+import {cards, logos, avatars} from "../services/const.js"
+
+
 
 
 
 const Admin = ({ allprofile }) => {
-   const avatars = [
-     { id: 1, avatar: avatar1 },
-     { id: 2, avatar: avatar2 },
-     { id: 3, avatar: avatar3 },
-     { id: 4, avatar: avatar4 },
-     { id: 5, avatar: avatar5 },
-     { id: 6, avatar: avatar6 },
-   ];
+
    
   // console.log("Bearer " + token);
   const {loginUser,setloginUser} = useContext(Context)
@@ -62,7 +36,6 @@ const Admin = ({ allprofile }) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      // setloginUser(JSON.parse(localStorage.getItem("token")).email);
       setexistuser();
       return 
     }{
@@ -94,55 +67,7 @@ const Admin = ({ allprofile }) => {
     setSelectedAvatar(avatar);
   };
 
-  const cards = [
-    {
-      id: 1,
-      image: cardatemp,
-      name: "Breeze",
-    },
-    {
-      id: 5,
-      image: cardetemp,
-      name: "Pixel",
-    },
-    {
-      id: 2,
-      image: cardbtemp,
-      name: "Hex",
-    },
-    {
-      id: 7,
-      image: cardgtemp,
 
-      name: "Peachy",
-    },
-    {
-      id: 6,
-      image: cardftemp,
-      name: "Eco Boy",
-    },
-    {
-      id: 3,
-      image: cardctemp,
-      name: "Dear Diary",
-    },
-    {
-      id: 4,
-      image: carddtemp,
-      name: "Bloom",
-    },
-  ];
-  const logos = {
-    x: x,
-    instagram: insta,
-    behance: behance,
-    github: github,
-    linkedin: linkedin,
-    youtube: youtube,
-    pinterest: pinterest,
-    portfolio: portfolio,
-    twitch: twitch,
-  };
 
   const completeprofile = async (e) => {
     
@@ -287,7 +212,7 @@ const Admin = ({ allprofile }) => {
   }, [currentStep]);
   // console.log(existuser)
 
-
+  console.log(logos)
   return (
     <>
       <div
@@ -339,7 +264,7 @@ const Admin = ({ allprofile }) => {
                     onChange={(e) => setUsername((prev) => e.target.value)}
                   />
                   {!unique ? (
-                    <p className="text-red-600 text-xs animate-bounce">
+                    <p className="text-red-600 text-xs">
                       Be yourself, Be unique
                     </p>
                   ) : (
@@ -360,7 +285,7 @@ const Admin = ({ allprofile }) => {
                   {selectedAvatar ? (
                     <p></p>
                   ) : (
-                    <p className="text-red-600 text-xs px-8 animate-bounce">
+                    <p className="text-red-600 text-xs px-8">
                       Select an avatar
                     </p>
                   )}
@@ -389,15 +314,16 @@ const Admin = ({ allprofile }) => {
               <Fade triggerOnce>
                 <UserLink setData={setData} />
                 {data.length < 3 && (
-                  <p className="text-red-600 text-xs px-8 mt-2 animate-bounce">
+                  <p className="text-red-600 text-xs px-8 mt-2">
                     Add atleast 3 link
                   </p>
                 )}
                 {data.map((d) => {
+                  console.log(d)
                   return (
                     <div className="flex justify-between p-2 w-full border-b gap-2 sm:gap-1">
                       <img
-                        src={logos[d.platform]}
+                        src={logos[d.platform].name}
                         alt=""
                         className=" scale-75 sm:scale-50"
                       />

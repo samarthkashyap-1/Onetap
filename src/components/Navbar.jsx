@@ -69,9 +69,9 @@ const [authcheck, setauthcheck] = useState(false)
 
         <div className="my-auto min-w-[30%] md:w-full md:mx-auto ">
           <ul className="flex justify-between md:flex-col md:gap-5 ">
-            <NavLink to="/templates" onClick={() => settoggle(!toggle)}>
-              <li className="hover:text-sec aria-[current=page]:text-blue-400 transition-colors  duration-300 text-center ease-in-out cursor-pointer">
-                Templates
+            <NavLink to="/" onClick={() => settoggle(!toggle)}>
+              <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
+                Home
               </li>
             </NavLink>
             <NavLink to="/discover" onClick={() => settoggle(!toggle)}>
@@ -79,11 +79,11 @@ const [authcheck, setauthcheck] = useState(false)
                 Discover
               </li>
             </NavLink>
-            <Link onClick={() => settoggle(!toggle)}>
-              <li className="hover:text-sec transition-colors duration-300  text-center ease-in-out cursor-pointer">
-                Contact Us
+            <NavLink to="/templates" onClick={() => settoggle(!toggle)}>
+              <li className="hover:text-sec aria-[current=page]:text-blue-400 transition-colors  duration-300 text-center ease-in-out cursor-pointer">
+                Templates
               </li>
-            </Link>
+            </NavLink>
           </ul>
         </div>
         <div className="my-auto w-[20%] md:w-full">

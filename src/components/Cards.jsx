@@ -7,28 +7,15 @@ import cardD from "../assets/CardD.jpg";
 import pacman from "../assets/pacman.jpg";
 import logo from "../assets/logo.png";
 import logowhite from "../assets/logo white.png";
-import x from "../assets/x.png";
-import instagram from "../assets/insta.svg";
-import behance from "../assets/behance.svg";
-import github from "../assets/git.svg";
-import linkedin from "../assets/link.svg";
-import youtube from "../assets/youtube.svg";
-import pinterest from "../assets/pinterest.svg";
-import twitch from "../assets/twitch.svg";
+
 import pac from "../assets/pac.jpg";
-import portfolio from "../assets/portfolio.png";
 import logoblack from "../assets/logoblack.png";
 import cardG from "../assets/cardG.png";
 import { Link } from "react-router-dom";
 import share from "../assets/share.svg";
   import { ToastContainer, toast } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
-  import avatar1 from "../assets/avatar1.svg";
-  import avatar2 from "../assets/avatar2.svg";
-  import avatar3 from "../assets/avatar3.svg";
-  import avatar4 from "../assets/avatar4.svg";
-  import avatar5 from "../assets/avatar5.svg";
-  import avatar6 from "../assets/avatar6.svg";
+import {avatars,logos} from "../services/const.js"
 
 const demo = {
   username: "John",
@@ -58,14 +45,7 @@ const demo = {
   ],
   card: 1,
 };
-  const avatars = [
-    { id: 1, avatar: avatar1 },
-    { id: 2, avatar: avatar2 },
-    { id: 3, avatar: avatar3 },
-    { id: 4, avatar: avatar4 },
-    { id: 5, avatar: avatar5 },
-    { id: 6, avatar: avatar6 },
-  ];
+
 const notify = () =>
   toast.success("Link Copied!", {
     autoClose: 1000,
@@ -73,29 +53,7 @@ const notify = () =>
     closeOnClick: true,
   });
 
-// const logos = {
-//   x: x,
-//   instagram: {instagram:instagram,url:"https://www.instagram.com"},
-//   behance: behance,
-//   github: github,
-//   linkedin: linkedin,
-//   youtube: youtube,
-//   pinterest: pinterest,
-//   portfolio: portfolio,
-//   twitch: twitch,
-// };
 
-const logos = {
-  x: { name: x, url: "https://www.twitter.com/" },
-  instagram: { name: instagram, url: "https://www.instagram.com/" },
-  behance: { name: behance, url: "https://www.behance.net/" },
-  github: { name: github, url: "https://www.github.com/" },
-  linkedin: { name: linkedin, url: "https://www.linkedin.com/in/" },
-  youtube: { name: youtube, url: "https://www.youtube.com/" },
-  pinterest: { name: pinterest, url: "https://www.pinterest.com/" },
-  portfolio: { name: portfolio, url: "https://yourportfolio.com/" },
-  twitch: { name: twitch, url: "https://www.twitch.tv/" },
-};
 
 const CardA = ({ user }) => {
   console.log(user);

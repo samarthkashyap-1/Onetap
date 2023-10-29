@@ -42,14 +42,14 @@ const Discover = () => {
                   <img
                     src={cardftemp}
                     alt=""
-                    className="absolute rounded-lg w-36 sm:w-32 h-fit top-10 sm:translate-z-16"
+                    className="absolute check rounded-lg w-36 sm:w-32 h-fit top-10 sm:translate-z-16"
                   />
 
                   <div className="inner-elementt">
                     <img
                       src={cardbtemp}
                       alt=""
-                      className="absolute rounded-lg w-24 h-fit sm:w-20 top-20 sm:translate-z-0 "
+                      className="absolute check rounded-lg w-24 h-fit sm:w-20 top-20 sm:translate-z-0 "
                     />
                   </div>
                 </div>
@@ -66,7 +66,7 @@ const Discover = () => {
         </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 px-20 gap-6">
           {/* Feature 1 */}
-          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
+          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200  ease-in-out hover:scale-105">
             <Fade triggerOnce>
               <h2 className="text-xl font-semibold mb-2">
                 User-Friendly Interface
@@ -80,7 +80,7 @@ const Discover = () => {
           </div>
 
           {/* Feature 2 */}
-          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
+          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200  ease-in-out hover:scale-105">
             <Fade triggerOnce>
               <h2 className="text-xl font-semibold mb-2">
                 Multiple Link Support
@@ -93,7 +93,7 @@ const Discover = () => {
             </Fade>
           </div>
           {/* Feature 3 */}
-          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
+          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200  ease-in-out hover:scale-105">
             <Fade triggerOnce>
               <h2 className="text-xl font-semibold mb-2">
                 Beautiful Templates
@@ -105,7 +105,7 @@ const Discover = () => {
             </Fade>
           </div>
           {/* Feature 6 */}
-          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
+          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200  ease-in-out hover:scale-105">
             <Fade triggerOnce>
               <h2 className="text-xl font-semibold mb-2">Social Integration</h2>
               <p className="text-gray-600">
@@ -117,7 +117,7 @@ const Discover = () => {
 
           {/* Feature 7 */}
 
-          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200 cursor-pointer ease-in-out hover:scale-105">
+          <div className="bg-white rounded-lg p-6 shadow-lg hover:bg-sec hover:text-white transition-all duration-200  ease-in-out hover:scale-105">
             <Fade triggerOnce>
               <h2 className="text-xl font-semibold mb-2">SEO Optimization</h2>
               <p className="text-gray-600">

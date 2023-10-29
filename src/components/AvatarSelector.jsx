@@ -1,26 +1,11 @@
 import React, { useEffect, useState } from "react";
-import avatar1 from "../assets/avatar1.svg";
-import avatar2 from "../assets/avatar2.svg";
-import avatar3 from "../assets/avatar3.svg";
-import avatar4 from "../assets/avatar4.svg";
-import avatar5 from "../assets/avatar5.svg";
-import avatar6 from "../assets/avatar6.svg";
+import { avatars } from "../services/const.js";
 
 
 
 
 const AvatarSelector = ({ onAvatarSelect}) => {
   const [selectedAvatar, setSelectedAvatar] = useState("");
-   const avatars = [
-     { id: 1, avatar: avatar1 },
-     { id: 2, avatar: avatar2 },
-     { id: 3, avatar: avatar3 },
-     { id: 4, avatar: avatar4 },
-     { id: 5, avatar: avatar5 },
-     { id: 6, avatar: avatar6 },
-   ];
-  
- 
 
   const handleAvatarClick = (avatar) => {
     

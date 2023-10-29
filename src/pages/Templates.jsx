@@ -1,67 +1,19 @@
 import React from 'react'
-import {CardA, CardB , CardC , CardD, CardE, CardF, CardG} from '../components/Cards'
+
 import Navbar from '../components/Navbar';
 
 import {Link} from "react-router-dom"
 
 import { Fade } from "react-awesome-reveal";
-import cardatemp from "../assets/cardatemp.png";
-import cardbtemp from "../assets/cardbtemp.png";
-import cardctemp from "../assets/cardctemp.png";
-import carddtemp from "../assets/carddtemp.png";
-import cardetemp from "../assets/cardetemp.png";
-import cardftemp from "../assets/cardftemp.png";
-import cardgtemp from "../assets/cardgtemp.png";
+
+import { cards } from "../services/const"
 
 
 const Templates = ({auth, setAuth}) => {
   window.scrollTo(0, 0);
   // create an object which have the details of the cards and images and index
 
-  const cards = [
-    {
-      id: 1,
-      image: cardatemp,
-      card: CardA,
-      name: "Breeze",
-    },
-    {
-      id: 5,
-      image: cardetemp,
-      card: CardE,
-      name: "Pixel",
-    },
-    {
-      id: 2,
-      image: cardbtemp,
-      card: CardB,
-      name: "Hex",
-    },
-    {
-      id: 7,
-      image: cardgtemp,
-      card: CardG,
-      name: "Peachy",
-    },
-    {
-      id: 6,
-      image: cardftemp,
-      card: CardF,
-      name: "Eco Boy",
-    },
-    {
-      id: 3,
-      image: cardctemp,
-      card: CardC,
-      name: "Dear Diary",
-    },
-    {
-      id: 4,
-      image: carddtemp,
-      card: CardD,
-      name: "Bloom",
-    },
-  ];
+
 
   return (
     <div className="min-h-screen px-20 p-10 sm:px-10 -z-10 ">
@@ -82,7 +34,7 @@ const Templates = ({auth, setAuth}) => {
                       <img
                         src={card.image}
                         alt=""
-                        className="w-52 rounded-xl group-hover:shadow-2xl group-hover:-translate-y-1 transition-all duration-300"
+                        className="w-52 rounded-xl  group-hover:shadow-2xl group-hover:-translate-y-1 transition-all duration-300"
                       />
                     <h1 className="text-2xl mt-4">{card.name}</h1>
                   </div>

@@ -1,22 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Dancing+Script&family=Merriweather:ital@0;1&family=Montserrat:wght@500;600&family=Pacifico&family=Pixelify+Sans&family=Tilt+Neon&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Dancing+Script&family=Merriweather:ital@0;1&family=Montserrat:wght@500;600&family=Pacifico&family=Pixelify+Sans&family=Tilt+Neon&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .active {
-    @apply text-sec
+  @apply text-sec;
 }
-html{
-    height: 100%;
-    width: 100%;
-    
+html {
+  height: 100%;
+  width: 100%;
 }
-#root{
-    height: 100%;
-    width: 100%;
-    position: relative;
-    margin: 0;
-    padding: 0;
+#root {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 /* #tilt {
@@ -37,8 +36,7 @@ height: 500px;
   cursor: pointer;
 } */
 .parallax-effect {
-    background-image: url("./assets/cardetemp.png");
-
+  background-image: url("./assets/cardetemp.png");
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -51,15 +49,12 @@ height: 500px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 
-/* transform: translateZ(150px); */
+  /* transform: translateZ(150px); */
   transform-style: preserve-3d;
-
 }
 .parallax-effectt {
-    background-image: url("./assets/cardftemp.png");
-
+  background-image: url("./assets/cardftemp.png");
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -72,30 +67,22 @@ height: 500px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 
-  
   transform-style: preserve-3d;
-
 }
 .inner-elementland {
-
-  
-  /* transform-style: preserve-3d; */
-
-  transform: translateZ(70px);
+  transform: translateZ(40px);
 }
 .inner-element {
-
-  
   transform-style: preserve-3d;
 
-  transform: translateZ(120px);
+  transform: translateZ(100px);
 }
 .inner-elementt {
+  transform: translateZ(80px);
+}
+.check{
 
-  
+  image-rendering: optimizeQuality; /* or pixelated for a pixel-art style */
 
-
-  transform: translateZ(100px);
 }
