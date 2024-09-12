@@ -11,6 +11,7 @@
     "jsonrun": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.3.1",
     "axios": "^1.5.1",
     "dotenv": "^16.3.1",
     "lottie-react": "^2.4.0",

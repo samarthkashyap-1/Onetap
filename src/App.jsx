@@ -5,6 +5,7 @@ import { useLocation, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 
 import axios from "axios";
+import { Analytics } from "@vercel/analytics/react"
 
 
 import Login from "./pages/Login";
@@ -79,25 +80,9 @@ function App() {
   return (
     <Context.Provider value={{ loginUser, setloginUser }}>
       <div className="min-h-screen">
+      <Analytics/>
+
         <Routes>
-          {/* <Route
-            path="/"
-            element={
-              <>
-                <Landing auth={auth} setAuth={setAuth} />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/templates"
-            element={
-              <>
-                <Templates auth={auth} setAuth={setAuth} />
-                <Footer />
-              </>
-            }
-          /> */}
 
           <Route path="/" element={<Home/>}>
             <Route index element={<Landing/>}/>
